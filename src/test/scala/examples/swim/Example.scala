@@ -89,7 +89,7 @@ object TraceAnalysis1 {
     val monitor = new Properties
     monitor.verify(trace)
     /*
-    // Testing performance - it does not "explode".
+    // Testing the performance - it does not "explode".
     for (i <- 1 to 10000000) {
       if (i % 10000 == 0) println(i / 10000)
       monitor.verify(Dequeue(FlightPos("A", "A2", 99, 99, 99, 99, Date(i))))
