@@ -71,9 +71,9 @@ class Properties extends MesaMonitor {
   )
 }
 
-// ====================================
-// === Performing a trace analysis: ===
-// ====================================
+// =======================
+// === Trace analysis: ===
+// =======================
 
 object TraceAnalysis1 {
 
