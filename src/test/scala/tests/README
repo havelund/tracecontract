@@ -1,0 +1,13 @@
+
+Overview of tests:
+
+test0 : Examples from TraceContract manual
+test1 : LogScope examples
+test2 : Random shooting
+test3 : Scala Days 2011 workshop paper
+test4 : Parameterization paper (in progress)
+test5 : Experiment with past time temporal logic
+test6 : FM 2011 conference paper
+test7 : Demo examples
+test8 : Various examples testing corner case absurd specifications
+test9 : Examples for LogFire paper

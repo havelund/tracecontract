@@ -1,0 +1,1477 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html>
+        <head>
+          <title>Formulas - TraceContract documentation - tracecontract.Formulas</title>
+          <meta name="description" content="Formulas - TraceContract documentation - tracecontract.Formulas" />
+          <meta name="keywords" content="Formulas TraceContract documentation tracecontract.Formulas" />
+          <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+          
+      <link href="../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
+      <link href="../lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
+      <script type="text/javascript">
+         if(top === self) {
+            var url = '../index.html';
+            var hash = 'tracecontract.Formulas';
+            var anchor = window.location.hash;
+            var anchor_opt = '';
+            if (anchor.length >= 1)
+              anchor_opt = '@' + anchor.substring(1);
+            window.location.href = url + '#' + hash + anchor_opt;
+         }
+   	  </script>
+    
+        </head>
+        <body class="type">
+      <div id="definition">
+        <img src="../lib/trait_big.png" />
+        <p id="owner"><a href="package.html" class="extype" name="tracecontract">tracecontract</a></p>
+        <h1>Formulas</h1>
+      </div>
+
+      <h4 id="signature" class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Formulas</span><span class="tparams">[<span name="Event">Event</span>]</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4>
+      
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>This trait provides the classes and methods with which to construct formulas. Formulas
+are passed as arguments to the methods <i>property(formula: Formula)</i> and <i>property(name: Symbol)(formula: Formula)</i> in
+class <a href="Monitor.html" class="extype" name="tracecontract.Monitor">tracecontract.Monitor</a>.
+</p></div><div class="toggleContainer block">
+          <span class="toggle">Linear Supertypes</span>
+          <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
+        </div><div class="toggleContainer block">
+          <span class="toggle">Known Subclasses</span>
+          <div class="subClasses hiddenContent"><a href="Monitor.html" class="extype" name="tracecontract.Monitor">Monitor</a></div>
+        </div></div>
+        
+
+      <div id="mbrsel">
+        <div id="textfilter"><span class="pre"></span><span class="input"><input id="mbrsel-input" type="text" accesskey="/" /></span><span class="post"></span></div>
+        <div id="order">
+              <span class="filtertype">Ordering</span>
+              <ol>
+                
+                <li class="alpha in"><span>Alphabetic</span></li>
+                <li class="inherit out"><span>By inheritance</span></li>
+              </ol>
+            </div>
+        <div id="ancestors">
+                <span class="filtertype">Inherited<br />
+                </span>
+                <ol id="linearization">
+                  <li class="in" name="tracecontract.Formulas"><span>Formulas</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                </ol>
+              </div><div id="ancestors">
+            <span class="filtertype"></span>
+            <ol>
+              <li class="hideall out"><span>Hide All</span></li>
+              <li class="showall in"><span>Show all</span></li>
+            </ol>
+            <a href="http://docs.scala-lang.org/overviews/scaladoc/usage.html#members" target="_blank">Learn more about member selection</a>
+          </div>
+        <div id="visbl">
+            <span class="filtertype">Visibility</span>
+            <ol><li class="public in"><span>Public</span></li><li class="all out"><span>All</span></li></ol>
+          </div>
+      </div>
+
+      <div id="template">
+        <div id="allMembers">
+        
+
+        <div id="types" class="types members">
+              <h3>Type Members</h3>
+              <ol><li name="tracecontract.Formulas.Block" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="Block=PartialFunction[Event,Formulas.this.Formula]"></a>
+      <a id="Block:Block"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Block</span><span class="result"> = <span class="extype" name="scala.PartialFunction">PartialFunction</span>[<span class="extype" name="tracecontract.Formulas.Event">Event</span>, <a href="Formulas$Formula.html" class="extype" name="tracecontract.Formulas.Formula">Formula</a>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Defines the type of transitions out of a state.</p><div class="fullcomment"><div class="comment cmt"><p>Defines the type of transitions out of a state.
+Transitions are represented as a partial function from events to formulas, referred to as a <i>block</i>.
+A block <i>f</i> is defined for an event <i>e</i> (triggers on <i>e</i>) if <i>f.isDefinedAt(e) == true</i>.
+The result of applying <i>f</i> to an event is the formula obtained by the call: <i>f(e)</i>.
+</p></div></div>
+    </li><li name="tracecontract.Formulas.BooleanOps" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="BooleanOpsextendsAnyRef"></a>
+      <a id="BooleanOps:BooleanOps"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="Formulas$BooleanOps.html"><span class="name">BooleanOps</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">Generated by implicit conversion from Boolean.</p>
+    </li><li name="tracecontract.Formulas.ElsePart" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ElsePartextendsAnyRef"></a>
+      <a id="ElsePart:ElsePart"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="Formulas$ElsePart.html"><span class="name">ElsePart</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">The <i>Else</i> part of an <i>If (condition) Then formula1 Else formula2</i>.</p>
+    </li><li name="tracecontract.Formulas.EventFormulaOps" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="EventFormulaOpsextendsAnyRef"></a>
+      <a id="EventFormulaOps:EventFormulaOps"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="Formulas$EventFormulaOps.html"><span class="name">EventFormulaOps</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">Target if implicit conversion of events.</p>
+    </li><li name="tracecontract.Formulas.Formula" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="FormulaextendsAnyRef"></a>
+      <a id="Formula:Formula"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="Formulas$Formula.html"><span class="name">Formula</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">Each different kind of formula supported by TraceContract is represented by an object or class that
+extends this class.</p>
+    </li><li name="tracecontract.Formulas.IntOps" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="IntOpsextendsAnyRef"></a>
+      <a id="IntOps:IntOps"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="Formulas$IntOps.html"><span class="name">IntOps</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">Generated by implicit conversion from integer.</p>
+    </li><li name="tracecontract.Formulas.IntPairOps" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="IntPairOpsextendsAnyRef"></a>
+      <a id="IntPairOps:IntPairOps"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="Formulas$IntPairOps.html"><span class="name">IntPairOps</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">Generated by implicit conversion from integer pair.</p>
+    </li><li name="tracecontract.Formulas.ThenPart" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ThenPartextendsAnyRef"></a>
+      <a id="ThenPart:ThenPart"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="Formulas$ThenPart.html"><span class="name">ThenPart</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">The <i>Then</i> part of an <i>If (condition) Then formula1 Else formula2</i>.</p>
+    </li></ol>
+            </div>
+
+        
+
+        <div id="values" class="values members">
+              <h3>Value Members</h3>
+              <ol><li name="scala.AnyRef#!=" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="!=(x$1:AnyRef):Boolean"></a>
+      <a id="!=(AnyRef):Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span title="gt4s: $bang$eq" class="name">!=</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="scala.Any#!=" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="!=(x$1:Any):Boolean"></a>
+      <a id="!=(Any):Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span title="gt4s: $bang$eq" class="name">!=</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li name="scala.AnyRef###" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="##():Int"></a>
+      <a id="##():Int"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span title="gt4s: $hash$hash" class="name">##</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="scala.AnyRef#==" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="==(x$1:AnyRef):Boolean"></a>
+      <a id="==(AnyRef):Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span title="gt4s: $eq$eq" class="name">==</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="scala.Any#==" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="==(x$1:Any):Boolean"></a>
+      <a id="==(Any):Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span title="gt4s: $eq$eq" class="name">==</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li name="tracecontract.Formulas.False" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="False"></a>
+      <a id="False:False"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Formulas$False$.html"><span class="name">False</span></a><span class="result"> extends <a href="Formulas$Formula.html" class="extype" name="tracecontract.Formulas.Formula">Formula</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">The value <i>false</i>.</p>
+    </li><li name="tracecontract.Formulas#If" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="If(condition:Formulas.this.Formula):Formulas.this.ThenPart"></a>
+      <a id="If(Formula):ThenPart"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">If</span><span class="params">(<span name="condition">condition: <a href="Formulas$Formula.html" class="extype" name="tracecontract.Formulas.Formula">Formula</a></span>)</span><span class="result">: <a href="Formulas$ThenPart.html" class="extype" name="tracecontract.Formulas.ThenPart">ThenPart</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">A construct of the form: If (condition) Then formula1 Else formula2
+</p><div class="fullcomment"><div class="comment cmt"><p>A construct of the form: If (condition) Then formula1 Else formula2
+</p></div><dl class="paramcmts block"><dt class="param">condition</dt><dd class="cmt"><p>The condition formula</p></dd><dt>returns</dt><dd class="cmt"><p>the <i>ThenPart</i>, providing the <i>Then</i> method.
+</p></dd></dl></div>
+    </li><li name="tracecontract.Formulas.True" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="True"></a>
+      <a id="True:True"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Formulas$True$.html"><span class="name">True</span></a><span class="result"> extends <a href="Formulas$Formula.html" class="extype" name="tracecontract.Formulas.Formula">Formula</a> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt"> The value <i>true</i>.</p>
+    </li><li name="tracecontract.Formulas#always" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="always(block:Formulas.this.Block):Formulas.this.Formula"></a>
+      <a id="always(Block):Formula"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">always</span><span class="params">(<span name="block">block: <a href="#Block=PartialFunction[Event,Formulas.this.Formula]" class="extmbr" name="tracecontract.Formulas.Block">Block</a></span>)</span><span class="result">: <a href="Formulas$Formula.html" class="extype" name="tracecontract.Formulas.Formula">Formula</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">An always state always waiting for an event to possibly match a transition (not required).</p><div class="fullcomment"><div class="comment cmt"><p>An always state always waiting for an event to possibly match a transition (not required).
+The state <i>&quot;always&quot;</i> remains active (until the end of the trace). For every incoming
+event <i>e</i> that matches the <i>block</i>, that is: <i>block.isDefinedAt(e) == true</i>, a new
+sub-property is added, which monitors <i>block(e)</i>.</p><p>At the end of the trace an <i>always state</i> formula evaluates to True.</p><p>As an example, consider the following monitor, which checks the
+property: <i>&quot;when a command x is issued, any fail from then on of that
+command should be followed by a retry of that command&quot;</i>:</p><p><br></p><p><pre>
+class Requirement extends Monitor[Event] {
+  property {
+    always {
+      case COMMAND(x) =>
+        always {
+          case FAIL(`x`) =>
+            hot {
+              case RETRY(`x`) => ok
+            }
+        }
+    }
+  }
+}
+</pre></p><p><br></p></div><dl class="paramcmts block"><dt class="param">block</dt><dd class="cmt"><p>partial function representing the transitions leading out of the state.</p></dd><dt>returns</dt><dd class="cmt"><p>the <i>always state</i> formula.
+</p></dd></dl></div>
+    </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="asInstanceOf[T0]:T0"></a>
+      <a id="asInstanceOf[T0]:T0"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">asInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: <span class="extype" name="scala.Any.asInstanceOf.T0">T0</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li name="tracecontract.Formulas#beep" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="beep:Unit"></a>
+      <a id="beep:Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">beep</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Emits a sound when executed.</p><div class="fullcomment"><div class="comment cmt"><p>Emits a sound when executed.
+The method can be used to give an audio-based warning. Can be useful in case lots of
+visual information is printed on screen and one wants a quick recognition of a special
+situation occurring.
+</p></div></div>
+    </li><li name="scala.AnyRef#clone" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="clone():Object"></a>
+      <a id="clone():AnyRef"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">clone</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../java$lang.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.CloneNotSupportedException]">...</span>
+    </span>)</span>
+              
+        </dd></dl></div>
+    </li><li name="tracecontract.Formulas#convBoolean2BooleanOps" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="convBoolean2BooleanOps(b:Boolean):Formulas.this.BooleanOps"></a>
+      <a id="convBoolean2BooleanOps(Boolean):BooleanOps"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">convBoolean2BooleanOps</span><span class="params">(<span name="b">b: <span class="extype" name="scala.Boolean">Boolean</span></span>)</span><span class="result">: <a href="Formulas$BooleanOps.html" class="extype" name="tracecontract.Formulas.BooleanOps">BooleanOps</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Implicit conversion from Boolean to <a href="Formulas$BooleanOps.html" class="extype" name="tracecontract.Formulas.BooleanOps">tracecontract.Formulas.BooleanOps</a>.</p><div class="fullcomment"><div class="comment cmt"><p>Implicit conversion from Boolean to <a href="Formulas$BooleanOps.html" class="extype" name="tracecontract.Formulas.BooleanOps">tracecontract.Formulas.BooleanOps</a>.
+This offers operations on Booleans.
+</p></div><dl class="paramcmts block"><dt class="param">b</dt><dd class="cmt"><p>the Boolean to be converted.</p></dd><dt>returns</dt><dd class="cmt"><p>the <a href="Formulas$BooleanOps.html" class="extype" name="tracecontract.Formulas.BooleanOps">tracecontract.Formulas.BooleanOps</a> object offering operations on <i>b</i>.
+</p></dd></dl></div>
+    </li><li name="tracecontract.Formulas#convBoolean2Formula" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="convBoolean2Formula(cond:Boolean):Formulas.this.Formula"></a>
+      <a id="convBoolean2Formula(Boolean):Formula"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">convBoolean2Formula</span><span class="params">(<span name="cond">cond: <span class="extype" name="scala.Boolean">Boolean</span></span>)</span><span class="result">: <a href="Formulas$Formula.html" class="extype" name="tracecontract.Formulas.Formula">Formula</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Implicit conversion from Boolean to Formula.</p><div class="fullcomment"><div class="comment cmt"><p>Implicit conversion from Boolean to Formula.
+This allows to write a Boolean expression as a formula, with the obvious semantics,
+that the Boolean expression must be true in order for the formula to become True.
+For example, the following property requires that no
+command name contains the string <i>&quot;REBOOT&quot;</i> (the right hand side of <i>=&gt;</i> is a Boolean
+expression, which is lifted to a Formula):</p><p><br></p><p><pre>
+require {
+  case COMMAND(x) => !(x contains "REBOOT")
+}
+</pre></p><p><br></p></div><dl class="paramcmts block"><dt class="param">cond</dt><dd class="cmt"><p>the Boolean value to be converted.</p></dd><dt>returns</dt><dd class="cmt"><p>the formula (True or False) corresponding to the value (true or false) of the Boolean <i>cond</i>.
+</p></dd></dl></div>
+    </li><li name="tracecontract.Formulas#convEvent2EventFormulaOps" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="convEvent2EventFormulaOps(event:Event):Formulas.this.EventFormulaOps"></a>
+      <a id="convEvent2EventFormulaOps(Event):EventFormulaOps"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">convEvent2EventFormulaOps</span><span class="params">(<span name="event">event: <span class="extype" name="tracecontract.Formulas.Event">Event</span></span>)</span><span class="result">: <a href="Formulas$EventFormulaOps.html" class="extype" name="tracecontract.Formulas.EventFormulaOps">EventFormulaOps</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Implicit conversion from events to <a href="Formulas$EventFormulaOps.html" class="extype" name="tracecontract.Formulas.EventFormulaOps">tracecontract.Formulas.EventFormulaOps</a>.</p><div class="fullcomment"><div class="comment cmt"><p>Implicit conversion from events to <a href="Formulas$EventFormulaOps.html" class="extype" name="tracecontract.Formulas.EventFormulaOps">tracecontract.Formulas.EventFormulaOps</a>.
+This offers operations on events.</p></div><dl class="paramcmts block"><dt class="param">event</dt><dd class="cmt"><p>the event to be converted.</p></dd><dt>returns</dt><dd class="cmt"><p>the <a href="Formulas$EventFormulaOps.html" class="extype" name="tracecontract.Formulas.EventFormulaOps">tracecontract.Formulas.EventFormulaOps</a> object offering operations on the <i>event</i>.
+</p></dd></dl></div>
+    </li><li name="tracecontract.Formulas#convEvent2Formula" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="convEvent2Formula(event:Event):Formulas.this.Formula"></a>
+      <a id="convEvent2Formula(Event):Formula"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">convEvent2Formula</span><span class="params">(<span name="event">event: <span class="extype" name="tracecontract.Formulas.Event">Event</span></span>)</span><span class="result">: <a href="Formulas$Formula.html" class="extype" name="tracecontract.Formulas.Formula">Formula</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Implicit conversion from Event to Formula.</p><div class="fullcomment"><div class="comment cmt"><p>Implicit conversion from Event to Formula.
+This allows to write an event as a formula, with the semantics that the observed
+event must be equal to it. As an example, this permits to write a formula of the following
+form, where the argument to <i>eventually</i> is an event, which by implicit conversion is
+then lifted to become a formula:</p><p><br></p><p><pre>
+eventually(SUCCESS("REBOOT"))
+</pre></p><p><br></p><p>The formula states that eventually an event must be observed wich satisfies the
+formula <i>SUCCESS(&quot;REBOOT&quot;)</i> - that is: is equal to it.</p><p><br></p></div><dl class="paramcmts block"><dt class="param">event</dt><dd class="cmt"><p>the event to be converted.</p></dd><dt>returns</dt><dd class="cmt"><p>the formula corresponding to the event.
+</p></dd></dl></div>
+    </li><li name="tracecontract.Formulas#convInt2IntOps" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="convInt2IntOps(x:Int):Formulas.this.IntOps"></a>
+      <a id="convInt2IntOps(Int):IntOps"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">convInt2IntOps</span><span class="params">(<span name="x">x: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <a href="Formulas$IntOps.html" class="extype" name="tracecontract.Formulas.IntOps">IntOps</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Implicit conversion from integers to <a href="Formulas$IntOps.html" class="extype" name="tracecontract.Formulas.IntOps">tracecontract.Formulas.IntOps</a>.</p><div class="fullcomment"><div class="comment cmt"><p>Implicit conversion from integers to <a href="Formulas$IntOps.html" class="extype" name="tracecontract.Formulas.IntOps">tracecontract.Formulas.IntOps</a>.
+This offers operations on integers.</p></div><dl class="paramcmts block"><dt class="param">x</dt><dd class="cmt"><p>the integer to be converted.</p></dd><dt>returns</dt><dd class="cmt"><p>the <a href="Formulas$IntOps.html" class="extype" name="tracecontract.Formulas.IntOps">tracecontract.Formulas.IntOps</a> object offering operations on the integer <i>x</i>.
+</p></dd></dl></div>
+    </li><li name="tracecontract.Formulas#convIntPair2IntPairOps" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="convIntPair2IntPairOps(pair:(Int,Int)):Formulas.this.IntPairOps"></a>
+      <a id="convIntPair2IntPairOps((Int,Int)):IntPairOps"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">convIntPair2IntPairOps</span><span class="params">(<span name="pair">pair: (<span class="extype" name="scala.Int">Int</span>, <span class="extype" name="scala.Int">Int</span>)</span>)</span><span class="result">: <a href="Formulas$IntPairOps.html" class="extype" name="tracecontract.Formulas.IntPairOps">IntPairOps</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Implicit conversion from integer pairs to <a href="Formulas$IntPairOps.html" class="extype" name="tracecontract.Formulas.IntPairOps">tracecontract.Formulas.IntPairOps</a>.</p><div class="fullcomment"><div class="comment cmt"><p>Implicit conversion from integer pairs to <a href="Formulas$IntPairOps.html" class="extype" name="tracecontract.Formulas.IntPairOps">tracecontract.Formulas.IntPairOps</a>.
+This offers operations on integer pairs.
+</p></div><dl class="paramcmts block"><dt class="param">pair</dt><dd class="cmt"><p>the integer pair to be converted.</p></dd><dt>returns</dt><dd class="cmt"><p>the <a href="Formulas$IntPairOps.html" class="extype" name="tracecontract.Formulas.IntPairOps">tracecontract.Formulas.IntPairOps</a> object offering operations on the <i>pair</i>.
+</p></dd></dl></div>
+    </li><li name="tracecontract.Formulas#convUnitToFormula" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="convUnitToFormula(unit:Unit):Formulas.this.Formula"></a>
+      <a id="convUnitToFormula(Unit):Formula"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">convUnitToFormula</span><span class="params">(<span name="unit">unit: <span class="extype" name="scala.Unit">Unit</span></span>)</span><span class="result">: <a href="Formulas$Formula.html" class="extype" name="tracecontract.Formulas.Formula">Formula</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Implicit conversion from the Unit value to Formula.</p><div class="fullcomment"><div class="comment cmt"><p>Implicit conversion from the Unit value to Formula.
+This allows to write a block of code (returning the Unit value, hence only
+executed for its side effect) as a formula. The result is the side effect and the returned
+formula is True. For example, the following monitor collects the commands observed in a set,
+and prints them out at the end of the trace:</p><p><br></p><p><pre>
+class Requirement extends Monitor[Event] {
+  var commands : Set[String] = Set()
+
+  require {
+    case COMMAND(x) =>
+      commands += x
+  }
+
+  override def finish() {
+    println("commands issued: " + (commands.mkString("{",",","}")))
+  }
+}
+</pre></p><p><br></p></div><dl class="paramcmts block"><dt class="param">unit</dt><dd class="cmt"><p>the Unit value to be converted.</p></dd><dt>returns</dt><dd class="cmt"><p>the formula True.
+</p></dd></dl></div>
+    </li><li name="tracecontract.Formulas#endUserDefined" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="endUserDefined(formula:Formulas.this.Formula):Boolean"></a>
+      <a id="endUserDefined(Formula):Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">endUserDefined</span><span class="params">(<span name="formula">formula: <a href="Formulas$Formula.html" class="extype" name="tracecontract.Formulas.Formula">Formula</a></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Determines whether a user-defined formula evaluates to true or false at the end of the trace.</p><div class="fullcomment"><div class="comment cmt"><p>Determines whether a user-defined formula evaluates to true or false at the end of the trace.
+This function must be overridden by the user whenever a new <i>Formula</i> is added. That is, whenever
+a new sub-class of the class <i>Formula</i> is defined.</p><p>As an example, consider that we add a formula for checking that a formula becomes true between <i>min</i> and <i>max</i> steps from now:</p><p><br></p><p><pre>
+
+// Definition of operator, by defining a new monitor class, in which class Formula is extended and in which we override the function endUserDefined:
+
+class MyMonitor[Event] extends Monitor[Event] {
+  case class NextN(now: Int, min: Int, max: Int, formula: Formula) extends Formula {
+    override def apply(event: Event): Formula = {
+      val newnow = now + 1
+      if (newnow < min) {
+        NextN(newnow, min, max, formula)
+      } else if (newnow > max) {
+        False
+      } else {
+        formula(event) or NextN(newnow, min, max, formula)
+      }
+    }
+  }
+
+  override def endUserDefined(formula: Formula): Boolean =
+    formula match {
+      case NextN(_, _, _, _) => false
+      case _ => false
+    }
+
+  def nextnm(min: Int, max: Int)(formula: Formula): Formula = NextN(0, min, max, formula)
+}
+
+
+// Example use for defining a requirement:
+
+class Requirement extends MyMonitor[Event] {
+  require {
+    case A(x) => nextnm(2, 4)(B(x))
+  }
+}
+</pre></p><p><br></p><p>Of course, in this case we could simply define <i>endUserDefined</i> as:</p><p><br></p><p><pre>
+ override def endUserDefined(formula: Formula): Boolean = false
+</pre></p><p><br></p><p>Or even not override it at all, since the default definition returns false for any argument formula.
+</p></div><dl class="paramcmts block"><dt class="param">formula</dt><dd class="cmt"><p>a formula remaining at the end of the trace. The function will determine whether it violates a liveness property.</p></dd><dt>returns</dt><dd class="cmt"><p>returns false if and only if the formula violates a liveness property.
+</p></dd></dl><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd></dl></div>
+    </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="eq(x$1:AnyRef):Boolean"></a>
+      <a id="eq(AnyRef):Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">eq</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="scala.AnyRef#equals" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="equals(x$1:Any):Boolean"></a>
+      <a id="equals(Any):Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">equals</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="tracecontract.Formulas#error" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="error(message:String):Formulas.this.Formula"></a>
+      <a id="error(String):Formula"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">error</span><span class="params">(<span name="message">message: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <a href="Formulas$Formula.html" class="extype" name="tracecontract.Formulas.Formula">Formula</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Emits the error message provided as argument and evaluates to False.</p><div class="fullcomment"><div class="comment cmt"><p>Emits the error message provided as argument and evaluates to False.
+This method is used to indicate an error situation.
+Can be used to convey values of data in scope, illustrating what causes an
+error to occur.</p><p>See the explanation of the unparameterized <i>error</i> method for when to use False instead of <i>error</i>.
+</p></div><dl class="paramcmts block"><dt class="param">message</dt><dd class="cmt"><p>the string to be printed on standard out.</p></dd><dt>returns</dt><dd class="cmt"><p>False
+</p></dd></dl></div>
+    </li><li name="tracecontract.Formulas#error" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="error:Formulas.this.Formula"></a>
+      <a id="error:Formula"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">error</span><span class="result">: <a href="Formulas$Formula.html" class="extype" name="tracecontract.Formulas.Formula">Formula</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Emits an error message and evaluates to False.</p><div class="fullcomment"><div class="comment cmt"><p>Emits an error message and evaluates to False.
+This method is used to indicate an error situation. False can
+be used instead. However, in some contexts, for example on the left hand side
+of an implication (<i>f<sub>1</sub> implies f<sub>2</sub></i>) or on the left hand side of a causal
+relation (<i>f<sub>1</sub> causes f<sub>2</sub></i>), one does not want an error message to be printed.
+In that case False should be used. The following example illustrates a case
+where <i>error</i> should not be used. The formula models the requirement that if a drive command
+is issued and then dispatched without a fail in between, then it should succeed.
+It is not an errror if it fails before being dispatched, hence False should be used
+instead of <i>error</i>, just like <i>False implies  True</i> is True and not an error:</p><p><pre>
+class Requirement extends Monitor[Event] {
+  def driveDispatched : Formula =
+    state {
+      case COMMAND("DRIVE") =>
+        state {
+          case FAIL("DRIVE") => False // do not use error here
+          case DISPATCH("DRIVE") => True
+        }
+    }
+
+  property {
+    driveDispatched causes eventually(SUCCESS("DRIVE"))
+  }
+}
+</pre>
+</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>False
+</p></dd></dl></div>
+    </li><li name="tracecontract.Formulas#eventually" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="eventually(formula:Formulas.this.Formula):Formulas.this.Formula"></a>
+      <a id="eventually(Formula):Formula"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">eventually</span><span class="params">(<span name="formula">formula: <a href="Formulas$Formula.html" class="extype" name="tracecontract.Formulas.Formula">Formula</a></span>)</span><span class="result">: <a href="Formulas$Formula.html" class="extype" name="tracecontract.Formulas.Formula">Formula</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Eventually true (an LTL formula).</p><div class="fullcomment"><div class="comment cmt"><p>Eventually true (an LTL formula).
+The formula <i>eventually(f)</i> for some formula <i>f</i> is True if <i>f</i> is True
+at some future point.</p><p>At the end of the trace <i>eventually(f)</i> evaluates to False independently of what <i>f</i> is.
+It is usually desired that <i>f</i> becomes True before then, and therefore there will be
+no <i>eventually(f)</i> appearing at the end of the trace.
+</p></div><dl class="paramcmts block"><dt class="param">formula</dt><dd class="cmt"><p>the formula that must be True eventually.</p></dd><dt>returns</dt><dd class="cmt"><p>the <i>eventually</i>-formula.
+</p></dd></dl></div>
+    </li><li name="tracecontract.Formulas#eventuallyBw" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="eventuallyBw(m:Int,n:Int,x:Int)(formula:Formulas.this.Formula):Formulas.this.Formula"></a>
+      <a id="eventuallyBw(Int,Int,Int)(Formula):Formula"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">eventuallyBw</span><span class="params">(<span name="m">m: <span class="extype" name="scala.Int">Int</span></span>, <span name="n">n: <span class="extype" name="scala.Int">Int</span></span>, <span name="x">x: <span class="extype" name="scala.Int">Int</span> = <span class="symbol">1</span></span>)</span><span class="params">(<span name="formula">formula: <a href="Formulas$Formula.html" class="extype" name="tracecontract.Formulas.Formula">Formula</a></span>)</span><span class="result">: <a href="Formulas$Formula.html" class="extype" name="tracecontract.Formulas.Formula">Formula</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Eventually true between <i>m</i> and <i>n</i> steps.</p><div class="fullcomment"><div class="comment cmt"><p>Eventually true between <i>m</i> and <i>n</i> steps.
+The formula <i>eventuallyBw(m,n)(f)</i> for some formula <i>f</i> is True if <i>f</i> is True
+at some future point in between steps <i>m</i> and <i>n</i>, counting the initial step as <i>1</i>.
+The formula <i>f</i> is not allowed to be True before the <i>m</i>'th step.
+For example, the following formula states that if an <i>A</i> is observed then
+eventually in between 3 and 5 steps there should be a <i>B</i>, counting the current step
+where <i>A</i> occurs as 1:</p><p><br></p><p><pre>
+globally{A implies eventuallyBw(3,5){B}}
+</pre></p><p><br></p><p>This formula will evaluate as follows on the following traces (x is an event different from A and B):</p><p><br></p><p><pre>
+  1 2 3 4 5 6 --- step counting
+x A x B x x x : True
+x A x x B x x : True
+x A x x x B x : True
+x A x x x x B : False
+x A B x x x x : False
+x A B B x x x : False
+x A x x x x x : False
+</pre></p><p><br></p><p>Note that the step counting starts when the call of eventuallyBw is activated. In the
+above example it is activated in the same step as <i>A</i> occurs. In the following specification
+it is activated in the next step:</p><p><br></p><p><pre>
+state {
+  case A => eventuallyBw(3,5){B}
+}
+</pre></p><p><br></p><p>Consequently, the <i>B</i>'s in the above traces would have to occur one step further to the right
+as follows:</p><p><br></p><p><pre>
+    1 2 3 4 5 6 --- step counting
+x A x x B x x x : True
+x A x x x B x x : True
+x A x x x x B x : True
+x A x x x x x B : False
+x A B B B x x x : False
+x A x x x x x x : False
+</pre></p><p><br></p><p>At the end of the trace <i>eventuallyBw(m,n)(f)</i> evaluates to False independently of what <i>f</i> is.
+</p></div><dl class="paramcmts block"><dt class="param">m</dt><dd class="cmt"><p>the lower bound, m included, for when formula must be True.</p></dd><dt class="param">n</dt><dd class="cmt"><p>the upper bound, n included, for when formula must be True.</p></dd><dt class="param">formula</dt><dd class="cmt"><p>the formula that must be True.</p></dd><dt>returns</dt><dd class="cmt"><p>the <i>eventuallyBw</i>-formula.
+</p></dd></dl></div>
+    </li><li name="tracecontract.Formulas#eventuallyEq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="eventuallyEq(n:Int)(formula:Formulas.this.Formula):Formulas.this.Formula"></a>
+      <a id="eventuallyEq(Int)(Formula):Formula"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">eventuallyEq</span><span class="params">(<span name="n">n: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="params">(<span name="formula">formula: <a href="Formulas$Formula.html" class="extype" name="tracecontract.Formulas.Formula">Formula</a></span>)</span><span class="result">: <a href="Formulas$Formula.html" class="extype" name="tracecontract.Formulas.Formula">Formula</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Eventually true at step <i>n</i>.</p><div class="fullcomment"><div class="comment cmt"><p>Eventually true at step <i>n</i>.
+The formula <i>eventuallyEq(n)(f)</i> for some formula <i>f</i> is True if <i>f</i> is True
+at future step <i>n</i>, counting the next step as <i>1</i>.
+The formula <i>f</i> is not allowed to be True before the <i>n</i>th step.
+The following equation holds:</p><p><br></p><p><pre>
+eventuallyEq(n)(f) = eventuallyBw(n, n)(f)
+</pre></p><p><br></p><p>At the end of the trace <i>eventuallyEq(n)(f)</i> evaluates to False independently of what <i>f</i> is.
+</p></div><dl class="paramcmts block"><dt class="param">n</dt><dd class="cmt"><p>the step at which formula must be True.</p></dd><dt class="param">formula</dt><dd class="cmt"><p>the formula that must be True.</p></dd><dt>returns</dt><dd class="cmt"><p>the <i>eventuallyEq</i>-formula.
+</p></dd></dl></div>
+    </li><li name="tracecontract.Formulas#eventuallyGe" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="eventuallyGe(n:Int)(formula:Formulas.this.Formula):Formulas.this.Formula"></a>
+      <a id="eventuallyGe(Int)(Formula):Formula"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">eventuallyGe</span><span class="params">(<span name="n">n: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="params">(<span name="formula">formula: <a href="Formulas$Formula.html" class="extype" name="tracecontract.Formulas.Formula">Formula</a></span>)</span><span class="result">: <a href="Formulas$Formula.html" class="extype" name="tracecontract.Formulas.Formula">Formula</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Eventually true at or after minimally <i>n</i> steps.</p><div class="fullcomment"><div class="comment cmt"><p>Eventually true at or after minimally <i>n</i> steps.
+The formula <i>eventuallyGe(n)(f)</i> for some formula <i>f</i> is True if <i>f</i> is True
+at or later than the <i>n</i>'th step, counting the initial step as <i>1</i>.
+The formula <i>f</i> is not allowed to be True before the <i>n</i>'th step.
+The following equation holds:</p><p><br></p><p><pre>
+eventuallyGe(n)(f) = eventuallyBw(n, Int.MaxValue)(f)
+</pre></p><p><br></p><p>At the end of the trace <i>eventuallyGe(n)(f)</i> evaluates to False independently of what <i>f</i> is.
+</p></div><dl class="paramcmts block"><dt class="param">n</dt><dd class="cmt"><p>the step at or later the formula must be True.</p></dd><dt class="param">formula</dt><dd class="cmt"><p>the formula that must be True.</p></dd><dt>returns</dt><dd class="cmt"><p>the <i>eventuallyGe</i>-formula.
+</p></dd></dl></div>
+    </li><li name="tracecontract.Formulas#eventuallyGt" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="eventuallyGt(n:Int)(formula:Formulas.this.Formula):Formulas.this.Formula"></a>
+      <a id="eventuallyGt(Int)(Formula):Formula"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">eventuallyGt</span><span class="params">(<span name="n">n: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="params">(<span name="formula">formula: <a href="Formulas$Formula.html" class="extype" name="tracecontract.Formulas.Formula">Formula</a></span>)</span><span class="result">: <a href="Formulas$Formula.html" class="extype" name="tracecontract.Formulas.Formula">Formula</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Eventually true after <i>n</i> steps.</p><div class="fullcomment"><div class="comment cmt"><p>Eventually true after <i>n</i> steps.
+The formula <i>eventuallyGt(n)(f)</i> for some formula <i>f</i> is True if <i>f</i> is True
+after <i>n</i> future steps, counting the initial step as <i>1</i>.
+The formula <i>f</i> is not allowed to be True before or at the <i>n</i>th step.
+The following equation holds:</p><p><br></p><p><pre>
+eventuallyGt(n)(f) = eventuallyBw(n+1, Int.MaxValue)(f)
+</pre></p><p><br></p><p>At the end of the trace <i>eventuallyGt(n)(f)</i> evaluates to False independently of what <i>f</i> is.
+</p></div><dl class="paramcmts block"><dt class="param">n</dt><dd class="cmt"><p>the step after which formula must be True.</p></dd><dt class="param">formula</dt><dd class="cmt"><p>the formula that must be True.</p></dd><dt>returns</dt><dd class="cmt"><p>the <i>eventuallyGt</i>-formula.
+</p></dd></dl></div>
+    </li><li name="tracecontract.Formulas#eventuallyLe" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="eventuallyLe(n:Int)(formula:Formulas.this.Formula):Formulas.this.Formula"></a>
+      <a id="eventuallyLe(Int)(Formula):Formula"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">eventuallyLe</span><span class="params">(<span name="n">n: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="params">(<span name="formula">formula: <a href="Formulas$Formula.html" class="extype" name="tracecontract.Formulas.Formula">Formula</a></span>)</span><span class="result">: <a href="Formulas$Formula.html" class="extype" name="tracecontract.Formulas.Formula">Formula</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Eventually true in maximally <i>n</i> steps.</p><div class="fullcomment"><div class="comment cmt"><p>Eventually true in maximally <i>n</i> steps.
+The formula <i>eventuallyLe(n)(f)</i> for some formula <i>f</i> is True if <i>f</i> is True
+at a future step between now and the <i>n</i>th step, <i>n</i> included, counting the initial step as <i>1</i>.
+The following equation holds:</p><p><br></p><p><pre>
+eventuallyLe(n)(f) = eventuallyBw(1, n)(f)
+</pre></p><p><br></p><p>At the end of the trace <i>eventuallyLe(n)(f)</i> evaluates to False independently of what <i>f</i> is.
+</p></div><dl class="paramcmts block"><dt class="param">n</dt><dd class="cmt"><p>the step before or at which formula must be True.</p></dd><dt class="param">formula</dt><dd class="cmt"><p>the formula that must be True.</p></dd><dt>returns</dt><dd class="cmt"><p>the <i>eventuallyLe</i>-formula.
+</p></dd></dl></div>
+    </li><li name="tracecontract.Formulas#eventuallyLt" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="eventuallyLt(n:Int)(formula:Formulas.this.Formula):Formulas.this.Formula"></a>
+      <a id="eventuallyLt(Int)(Formula):Formula"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">eventuallyLt</span><span class="params">(<span name="n">n: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="params">(<span name="formula">formula: <a href="Formulas$Formula.html" class="extype" name="tracecontract.Formulas.Formula">Formula</a></span>)</span><span class="result">: <a href="Formulas$Formula.html" class="extype" name="tracecontract.Formulas.Formula">Formula</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Eventually true in less than <i>n</i> steps.</p><div class="fullcomment"><div class="comment cmt"><p>Eventually true in less than <i>n</i> steps.
+The formula <i>eventuallyLt(n)(f)</i> for some formula <i>f</i> is True if <i>f</i> is True
+in less than <i>n</i> future steps, counting the initial step as <i>1</i>.
+The following equation holds:</p><p><br></p><p><pre>
+eventuallyLt(n)(f) = eventuallyBw(1, n-1)(f)
+</pre></p><p><br></p><p>At the end of the trace <i>eventuallyLt(n)(f)</i> evaluates to False independently of what <i>f</i> is.
+</p></div><dl class="paramcmts block"><dt class="param">n</dt><dd class="cmt"><p>the step before which formula must be True.</p></dd><dt class="param">formula</dt><dd class="cmt"><p>the formula that must be True.</p></dd><dt>returns</dt><dd class="cmt"><p>the <i>eventuallyLt</i>-formula.
+</p></dd></dl></div>
+    </li><li name="tracecontract.Formulas#exec" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="exec(formula:=&gt;Formulas.this.Formula):Formulas.this.Formula"></a>
+      <a id="exec(⇒Formula):Formula"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">exec</span><span class="params">(<span name="formula">formula: ⇒ <a href="Formulas$Formula.html" class="extype" name="tracecontract.Formulas.Formula">Formula</a></span>)</span><span class="result">: <a href="Formulas$Formula.html" class="extype" name="tracecontract.Formulas.Formula">Formula</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Execute code (can for example be used in LTL formula).</p><div class="fullcomment"><div class="comment cmt"><p>Execute code (can for example be used in LTL formula).
+The formula <i>exec{f}</i> for some formula <i>f</i> executes <i>f</i> as code.
+Note that a piece of code can occur as a formula. The code can return unit
+(corresponding to True), a Boolean or a formula. In all these cases the result is a formula.
+At the end of the trace <i>exec{f}</i> evaluates to True independently of what <i>f</i> is.</p><p>As an example consider the following specification which counts the number of
+a particular command and checks that there are exactly three. Note that
+<i>implies</i> is evaluated with short-circuit semantics: if the left-hand side
+evaluates to false, the right-hand side is not evaluated.</p><p><br></p><p><pre>
+class CountSomeCommands extends Monitor[Event] {
+  var counter = 0
+
+  property {
+    globally {
+      Command("STOP_DRIVING",1) implies exec {
+        counter += 1
+      }
+    }
+  }
+
+  override def finish() {
+    if (counter != 3) assert(false, "counter=" + counter)
+  }
+}
+</pre></p><p><br></p></div><dl class="paramcmts block"><dt class="param">formula</dt><dd class="cmt"><p>the code that is to be executed, and which can return a formula.</p></dd><dt>returns</dt><dd class="cmt"><p>the <i>exec</i>-formula.
+</p></dd></dl></div>
+    </li><li name="scala.AnyRef#finalize" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="finalize():Unit"></a>
+      <a id="finalize():Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">finalize</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../java$lang.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="symbol">classOf[java.lang.Throwable]</span>
+    </span>)</span>
+              
+        </dd></dl></div>
+    </li><li name="scala.AnyRef#getClass" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="getClass():Class[_]"></a>
+      <a id="getClass():Class[_]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">getClass</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.Class">Class</span>[_]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="tracecontract.Formulas#globally" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="globally(formula:Formulas.this.Formula):Formulas.this.Formula"></a>
+      <a id="globally(Formula):Formula"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">globally</span><span class="params">(<span name="formula">formula: <a href="Formulas$Formula.html" class="extype" name="tracecontract.Formulas.Formula">Formula</a></span>)</span><span class="result">: <a href="Formulas$Formula.html" class="extype" name="tracecontract.Formulas.Formula">Formula</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Globally true (an LTL formula).</p><div class="fullcomment"><div class="comment cmt"><p>Globally true (an LTL formula).
+The formula <i>globally(f)</i> for some formula <i>f</i> is True if <i>f</i> is True
+from now on and in all future steps.</p><p>At the end of the trace <i>globally(f)</i> evaluates to True independently of what <i>f</i> is.
+</p></div><dl class="paramcmts block"><dt class="param">formula</dt><dd class="cmt"><p>the formula that must be True in all steps from now on.</p></dd><dt>returns</dt><dd class="cmt"><p>the <i>globally</i>-formula.
+</p></dd></dl></div>
+    </li><li name="scala.AnyRef#hashCode" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="hashCode():Int"></a>
+      <a id="hashCode():Int"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">hashCode</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="tracecontract.Formulas#hot" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="hot(m:Int,n:Int)(block:Formulas.this.Block):Formulas.this.Formula"></a>
+      <a id="hot(Int,Int)(Block):Formula"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">hot</span><span class="params">(<span name="m">m: <span class="extype" name="scala.Int">Int</span></span>, <span name="n">n: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="params">(<span name="block">block: <a href="#Block=PartialFunction[Event,Formulas.this.Formula]" class="extmbr" name="tracecontract.Formulas.Block">Block</a></span>)</span><span class="result">: <a href="Formulas$Formula.html" class="extype" name="tracecontract.Formulas.Formula">Formula</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">A hot state waiting for an event to eventually match a transition (required) between <i>m</i> and <i>n</i> steps.</p><div class="fullcomment"><div class="comment cmt"><p>A hot state waiting for an event to eventually match a transition (required) between <i>m</i> and <i>n</i> steps.
+The initial step is counted as step as 1. The state remains active until the incoming event <i>e</i> matches the <i>block</i>,
+that is, until <i>block.isDefinedAt(e) == true</i>, in which case the state formula evaluates
+to <i>block(e)</i>. An error is emitted if the state triggers before the <i>m</i>th step or does not trigger
+before or at the <i>n</i>th step.</p><p>At the end of the trace a <i>hot state</i> formula evaluates to False.</p><p>As an example, consider the following monitor, which checks the
+property: <i>&quot;a command x eventually should be followed by a success within 3 to 5 steps&quot;</i>:</p><p><br></p><p><pre>
+class Requirement extends Monitor[Event] {
+  require {
+    case COMMAND(x) =>
+      hot(3,5) {
+        case SUCCESS(`x`) => ok
+      }
+  }
+}
+</pre></p><p><br></p></div><dl class="paramcmts block"><dt class="param">m</dt><dd class="cmt"><p>the minimal number of steps that have to occur before a transition can trigger.
+The transition can trigger at step m.</p></dd><dt class="param">n</dt><dd class="cmt"><p>the maximal number of steps within which a transition must trigger.
+The transition can trigger at step n.</p></dd><dt class="param">block</dt><dd class="cmt"><p>partial function representing the transitions leading out of the state.</p></dd><dt>returns</dt><dd class="cmt"><p>the <i>hot state</i> formula.
+</p></dd></dl></div>
+    </li><li name="tracecontract.Formulas#hot" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="hot(block:Formulas.this.Block):Formulas.this.Formula"></a>
+      <a id="hot(Block):Formula"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">hot</span><span class="params">(<span name="block">block: <a href="#Block=PartialFunction[Event,Formulas.this.Formula]" class="extmbr" name="tracecontract.Formulas.Block">Block</a></span>)</span><span class="result">: <a href="Formulas$Formula.html" class="extype" name="tracecontract.Formulas.Formula">Formula</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">A hot state waiting for an event to eventually match a transition (required).</p><div class="fullcomment"><div class="comment cmt"><p>A hot state waiting for an event to eventually match a transition (required).
+The state remains active until the incoming event <i>e</i> matches the <i>block</i>,
+that is, until <i>block.isDefinedAt(e) == true</i>, in which case the state formula evaluates
+to <i>block(e)</i>.</p><p>At the end of the trace a <i>hot state</i> formula evaluates to False.</p><p>As an example, consider the following monitor, which checks the
+property: <i>&quot;a command x eventually should be followed by a success&quot;</i>:</p><p><br></p><p><pre>
+class Requirement extends Monitor[Event] {
+  require {
+    case COMMAND(x) =>
+      hot {
+        case SUCCESS(`x`) => ok
+      }
+  }
+}
+</pre></p><p><br></p></div><dl class="paramcmts block"><dt class="param">block</dt><dd class="cmt"><p>partial function representing the transitions leading out of the state.</p></dd><dt>returns</dt><dd class="cmt"><p>the <i>hot state</i> formula.
+</p></dd></dl></div>
+    </li><li name="scala.Any#isInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="isInstanceOf[T0]:Boolean"></a>
+      <a id="isInstanceOf[T0]:Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">isInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li name="tracecontract.Formulas#matches" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="matches(predicate:PartialFunction[Event,Boolean]):Formulas.this.Formula"></a>
+      <a id="matches(PartialFunction[Event,Boolean]):Formula"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">matches</span><span class="params">(<span name="predicate">predicate: <span class="extype" name="scala.PartialFunction">PartialFunction</span>[<span class="extype" name="tracecontract.Formulas.Event">Event</span>, <span class="extype" name="scala.Boolean">Boolean</span>]</span>)</span><span class="result">: <a href="Formulas$Formula.html" class="extype" name="tracecontract.Formulas.Formula">Formula</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Matches current event against a predicate.</p><div class="fullcomment"><div class="comment cmt"><p>Matches current event against a predicate.
+The formula <i>matches(pred)</i> is True if and only if <i>pred</i> is defined for
+the <b>current</b> event <i>e</i>, and furthermore <i>pred(e) == true</i>.
+For example, the following formula states that eventually there should be a command,
+the name of which starts with <i>&quot;PICTURE&quot;</i>:</p><p><br></p><p><pre>
+eventually(matches{case COMMAND(x) => x startsWith "PICTURE"})
+</pre></p><p><br></p></div><dl class="paramcmts block"><dt class="param">predicate</dt><dd class="cmt"><p>that has to match current event for formula to become True</p></dd><dt>returns</dt><dd class="cmt"><p>the value True or False, depending on whether <i>pred</i> is true on the current event.
+</p></dd></dl></div>
+    </li><li name="scala.AnyRef#ne" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="ne(x$1:AnyRef):Boolean"></a>
+      <a id="ne(AnyRef):Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">ne</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="tracecontract.Formulas#never" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="never(formula:Formulas.this.Formula):Formulas.this.Formula"></a>
+      <a id="never(Formula):Formula"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">never</span><span class="params">(<span name="formula">formula: <a href="Formulas$Formula.html" class="extype" name="tracecontract.Formulas.Formula">Formula</a></span>)</span><span class="result">: <a href="Formulas$Formula.html" class="extype" name="tracecontract.Formulas.Formula">Formula</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Never true (an LTL-inspired formula).</p><div class="fullcomment"><div class="comment cmt"><p>Never true (an LTL-inspired formula).
+The formula <i>never(f)</i> for some formula <i>f</i> is True if <i>f</i> is never True
+from now on and in all future steps. The formula <i>never(f)</i> is an abbreviation for the
+formula: <i>always(not(f))</i>.</p><p>At the end of the trace <i>never(f)</i> evaluates to True independently of what <i>f</i> is.
+</p></div><dl class="paramcmts block"><dt class="param">formula</dt><dd class="cmt"><p>the formula that must never be True in all steps from now on.</p></dd><dt>returns</dt><dd class="cmt"><p>the <i>never</i>-formula.
+</p></dd></dl></div>
+    </li><li name="tracecontract.Formulas#not" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="not(formula:Formulas.this.Formula):Formulas.this.Formula"></a>
+      <a id="not(Formula):Formula"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">not</span><span class="params">(<span name="formula">formula: <a href="Formulas$Formula.html" class="extype" name="tracecontract.Formulas.Formula">Formula</a></span>)</span><span class="result">: <a href="Formulas$Formula.html" class="extype" name="tracecontract.Formulas.Formula">Formula</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Boolean negation.</p><div class="fullcomment"><div class="comment cmt"><p>Boolean negation.
+Given a formula <i>f</i>, the formula <i>not f</i> is the negation of <i>f</i>. That is, if
+<i>f</i> evaluates to True, <i>not f</i> evaluates to False, and vice versa.
+</p></div><dl class="paramcmts block"><dt class="param">formula</dt><dd class="cmt"><p>the formula to be negated.</p></dd><dt>returns</dt><dd class="cmt"><p>the negated formula.
+</p></dd></dl></div>
+    </li><li name="scala.AnyRef#notify" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="notify():Unit"></a>
+      <a id="notify():Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">notify</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="scala.AnyRef#notifyAll" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="notifyAll():Unit"></a>
+      <a id="notifyAll():Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">notifyAll</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="tracecontract.Formulas#ok" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="ok(message:String):Formulas.this.Formula"></a>
+      <a id="ok(String):Formula"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">ok</span><span class="params">(<span name="message">message: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <a href="Formulas$Formula.html" class="extype" name="tracecontract.Formulas.Formula">Formula</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Emits the message provided as argument and evaluates to True.</p><div class="fullcomment"><div class="comment cmt"><p>Emits the message provided as argument and evaluates to True.
+This method is used to indicate a good situation.
+Can be used to convey values of data in scope, illustrating why a situation is good.
+</p></div><dl class="paramcmts block"><dt class="param">message</dt><dd class="cmt"><p>the string to be printed on standard out.</p></dd><dt>returns</dt><dd class="cmt"><p>True
+</p></dd></dl></div>
+    </li><li name="tracecontract.Formulas#ok" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="ok:Formulas.this.Formula"></a>
+      <a id="ok:Formula"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">ok</span><span class="result">: <a href="Formulas$Formula.html" class="extype" name="tracecontract.Formulas.Formula">Formula</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Equivalent to True.</p><div class="fullcomment"><div class="comment cmt"><p>Equivalent to True.
+This method is used to indicate a good situation.
+</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>True
+</p></dd></dl></div>
+    </li><li name="tracecontract.Formulas#state" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="state(block:Formulas.this.Block):Formulas.this.Formula"></a>
+      <a id="state(Block):Formula"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">state</span><span class="params">(<span name="block">block: <a href="#Block=PartialFunction[Event,Formulas.this.Formula]" class="extmbr" name="tracecontract.Formulas.Block">Block</a></span>)</span><span class="result">: <a href="Formulas$Formula.html" class="extype" name="tracecontract.Formulas.Formula">Formula</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">A state waiting for an event to possibly match a transition (not required).</p><div class="fullcomment"><div class="comment cmt"><p>A state waiting for an event to possibly match a transition (not required).
+The state remains active until the incoming event <i>e</i> matches the <i>block</i>,
+that is, until <i>block.isDefinedAt(e) == true</i>, in which case the state formula evaluates
+to <i>block(e)</i>.</p><p>At the end of the trace a <i>state</i> formula evaluates to True.</p><p>As an example, consider the following monitor, which checks the
+property: <i>&quot;a command x should not be issued more than once&quot;</i>:</p><p><br></p><p><pre>
+class Requirement extends Monitor[Event] {
+  require {
+    case COMMAND(x) =>
+      state {
+        case COMMAND(`x`) => error
+      }
+  }
+}
+</pre></p><p><br></p></div><dl class="paramcmts block"><dt class="param">block</dt><dd class="cmt"><p>partial function representing the transitions leading out of the state.</p></dd><dt>returns</dt><dd class="cmt"><p>the <i>state</i> formula.
+</p></dd></dl></div>
+    </li><li name="tracecontract.Formulas#step" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="step(block:Formulas.this.Block):Formulas.this.Formula"></a>
+      <a id="step(Block):Formula"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">step</span><span class="params">(<span name="block">block: <a href="#Block=PartialFunction[Event,Formulas.this.Formula]" class="extmbr" name="tracecontract.Formulas.Block">Block</a></span>)</span><span class="result">: <a href="Formulas$Formula.html" class="extype" name="tracecontract.Formulas.Formula">Formula</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">A step state watching for an event to possibly match a transition in the next step (not required).</p><div class="fullcomment"><div class="comment cmt"><p>A step state watching for an event to possibly match a transition in the next step (not required).
+The state remains active one! step. If the next incoming event <i>e</i> matches the <i>block</i>,
+that is: <i>block.isDefinedAt(e) == true</i>, the step formula evaluates
+to <i>block(e)</i>. Otherwise (if <i>block.isDefinedAt(e) == false</i>) it evaluates to True.</p><p>At the end of the trace a <i>step state</i> formula evaluates to True.</p><p>As an example, consider the following monitor, which checks the
+property: <i>&quot;a command x should not be issued in two consequtive steps right after each other&quot;</i>:</p><p><br></p><p><pre>
+class Requirement extends Monitor[Event] {
+  require {
+    case COMMAND(x) =>
+      step {
+        case COMMAND(`x`) => error
+      }
+  }
+}
+</pre></p><p><br></p></div><dl class="paramcmts block"><dt class="param">block</dt><dd class="cmt"><p>partial function representing the transitions leading out of the state.</p></dd><dt>returns</dt><dd class="cmt"><p>the <i>step state</i> formula.
+</p></dd></dl></div>
+    </li><li name="tracecontract.Formulas#strong" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="strong(block:Formulas.this.Block):Formulas.this.Formula"></a>
+      <a id="strong(Block):Formula"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">strong</span><span class="params">(<span name="block">block: <a href="#Block=PartialFunction[Event,Formulas.this.Formula]" class="extmbr" name="tracecontract.Formulas.Block">Block</a></span>)</span><span class="result">: <a href="Formulas$Formula.html" class="extype" name="tracecontract.Formulas.Formula">Formula</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">A strong state expecting an event to match a transition in the next step.</p><div class="fullcomment"><div class="comment cmt"><p>A strong state expecting an event to match a transition in the next step.
+The state remains active one! step. If the next incoming event <i>e</i> matches the <i>block</i>,
+that is: <i>block.isDefinedAt(e) == true</i>, the strong formula evaluates
+to <i>block(e)</i>. Otherwise (if <i>block.isDefinedAt(e) == false</i>) it evaluates to False.</p><p>At the end of the trace a <i>strong state</i> formula evaluates to False. That is, there must be
+a next event for which <i>block</i> is defined.</p><p>As an example, consider the following monitor, which checks the
+property: <i>&quot;a command x must be followed by a success in the next step&quot;</i>:</p><p><br></p><p><pre>
+class Requirement extends Monitor[Event] {
+  require {
+    case COMMAND(x) =>
+      strong {
+        case SUCCESS(`x`) => ok
+      }
+  }
+}
+</pre></p><p><br></p></div><dl class="paramcmts block"><dt class="param">block</dt><dd class="cmt"><p>partial function representing the transitions leading out of the state.</p></dd><dt>returns</dt><dd class="cmt"><p>the <i>strong state</i> formula.
+</p></dd></dl></div>
+    </li><li name="tracecontract.Formulas#strongnext" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="strongnext(formula:=&gt;Formulas.this.Formula):Formulas.this.Formula"></a>
+      <a id="strongnext(⇒Formula):Formula"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">strongnext</span><span class="params">(<span name="formula">formula: ⇒ <a href="Formulas$Formula.html" class="extype" name="tracecontract.Formulas.Formula">Formula</a></span>)</span><span class="result">: <a href="Formulas$Formula.html" class="extype" name="tracecontract.Formulas.Formula">Formula</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">True in the next step (an LTL formula).</p><div class="fullcomment"><div class="comment cmt"><p>True in the next step (an LTL formula).
+The formula <i>strongnext(f)</i> for some formula <i>f</i> is True iff. there is a next step
+(it is not the end of the trace), and <i>f</i> is True in the next step.</p><p>At the end of the trace <i>strongnext(f)</i> evaluates to False independently of what <i>f</i> is.
+</p></div><dl class="paramcmts block"><dt class="param">formula</dt><dd class="cmt"><p>the formula that must be True in the next step.
+The formula is called 'by name', which means that it is not evaluated until the next step.</p></dd><dt>returns</dt><dd class="cmt"><p>the <i>strongnext</i>-formula.
+</p></dd></dl></div>
+    </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="synchronized[T0](x$1:=&gt;T0):T0"></a>
+      <a id="synchronized[T0](⇒T0):T0"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">synchronized</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="params">(<span name="arg0">arg0: ⇒ <span class="extype" name="java.lang.AnyRef.synchronized.T0">T0</span></span>)</span><span class="result">: <span class="extype" name="java.lang.AnyRef.synchronized.T0">T0</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="scala.AnyRef#toString" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="toString():String"></a>
+      <a id="toString():String"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">toString</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="tracecontract.Formulas#unless" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="unless(block:Formulas.this.Block):Formulas.this.Formula"></a>
+      <a id="unless(Block):Formula"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">unless</span><span class="params">(<span name="block">block: <a href="#Block=PartialFunction[Event,Formulas.this.Formula]" class="extmbr" name="tracecontract.Formulas.Block">Block</a></span>)</span><span class="result">: <a href="Formulas$Formula.html" class="extype" name="tracecontract.Formulas.Formula">Formula</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">An unless state waiting for an event to eventually match a transition and yield a result different from False
+(not required).</p><div class="fullcomment"><div class="comment cmt"><p>An unless state waiting for an event to eventually match a transition and yield a result different from False
+(not required).
+The state remains active until the incoming event <i>e</i> matches the <i>block</i>,
+that is, until <i>block.isDefinedAt(e) == true</i>, and <i>block(e)</i> evaluates to a formula different from False
+(does not need to be True necessarily),
+in which case the unless state evaluates to <i>block(e)</i>.</p><p>At the end of the trace an <i>unless state</i> evaluates to True.</p><p>As an example, consider the following monitor, which checks the
+property: <i>&quot;when a command succeeds, report every single additional success unless a new command with the same name is issued&quot;</i>:</p><p><br></p><p><pre>
+class Requirement extends Monitor[Event] {
+  require {
+    case SUCCESS(x) =>
+      unless {
+        case SUCCESS(`x`) => error
+        case COMMAND(`x`) => ok
+      }
+  }
+}
+</pre></p><p><br></p></div><dl class="paramcmts block"><dt class="param">block</dt><dd class="cmt"><p>partial function representing the transitions leading out of the state.</p></dd><dt>returns</dt><dd class="cmt"><p>the <i>unless state</i> formula.
+</p></dd></dl></div>
+    </li><li name="tracecontract.Formulas#until" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="until(block:Formulas.this.Block):Formulas.this.Formula"></a>
+      <a id="until(Block):Formula"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">until</span><span class="params">(<span name="block">block: <a href="#Block=PartialFunction[Event,Formulas.this.Formula]" class="extmbr" name="tracecontract.Formulas.Block">Block</a></span>)</span><span class="result">: <a href="Formulas$Formula.html" class="extype" name="tracecontract.Formulas.Formula">Formula</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">An until state waiting for an event to eventually match a transition and yield a result different from False (required).</p><div class="fullcomment"><div class="comment cmt"><p>An until state waiting for an event to eventually match a transition and yield a result different from False (required).
+The state remains active until the incoming event <i>e</i> matches the <i>block</i>,
+that is, until <i>block.isDefinedAt(e) == true</i>, and <i>block(e)</i> evaluates to a formula different from False
+(does not need to be True necessarily),
+in which case the until state evaluates to <i>block(e)</i>.</p><p>At the end of the trace an <i>until state</i> evaluates to False.</p><p>As an example, consider the following monitor, which checks the
+property: <i>&quot;a command x eventually should be followed by a success, and any failure on the way should be reported&quot;</i>:</p><p><br></p><p><pre>
+class Requirement extends Monitor[Event] {
+  require {
+    case COMMAND(x) =>
+      until {
+        case FAIL(`x`) => error
+        case SUCCESS(`x`) => ok
+      }
+  }
+}
+</pre></p><p><br></p></div><dl class="paramcmts block"><dt class="param">block</dt><dd class="cmt"><p>partial function representing the transitions leading out of the state.</p></dd><dt>returns</dt><dd class="cmt"><p>the <i>until state</i> formula.
+</p></dd></dl></div>
+    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="wait():Unit"></a>
+      <a id="wait():Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">wait</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.InterruptedException]">...</span>
+    </span>)</span>
+              
+        </dd></dl></div>
+    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="wait(x$1:Long,x$2:Int):Unit"></a>
+      <a id="wait(Long,Int):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Long">Long</span></span>, <span name="arg1">arg1: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.InterruptedException]">...</span>
+    </span>)</span>
+              
+        </dd></dl></div>
+    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="wait(x$1:Long):Unit"></a>
+      <a id="wait(Long):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Long">Long</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.InterruptedException]">...</span>
+    </span>)</span>
+              
+        </dd></dl></div>
+    </li><li name="tracecontract.Formulas#weak" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="weak(block:Formulas.this.Block):Formulas.this.Formula"></a>
+      <a id="weak(Block):Formula"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">weak</span><span class="params">(<span name="block">block: <a href="#Block=PartialFunction[Event,Formulas.this.Formula]" class="extmbr" name="tracecontract.Formulas.Block">Block</a></span>)</span><span class="result">: <a href="Formulas$Formula.html" class="extype" name="tracecontract.Formulas.Formula">Formula</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">A weak state expecting an event to match a transition in the next step, if there is a next step.</p><div class="fullcomment"><div class="comment cmt"><p>A weak state expecting an event to match a transition in the next step, if there is a next step.
+If there is no next step, the formula evaluates to True. Otherwise if the next incoming
+event <i>e</i> matches the <i>block</i>, that is: <i>block.isDefinedAt(e) == true</i>, the weak
+formula evaluates to <i>block(e)</i>. Otherwise (if <i>block.isDefinedAt(e) == false</i>) it
+evaluates to False.</p><p>At the end of the trace a <i>weak state</i> formula evaluates to True. That is, there does not need
+to be a next event. If there is, however, <i>block</i> must be defined on it.</p><p>As an example, consider the following monitor, which checks the
+property: <i>&quot;a command x must be followed by a success in the next step, if there is a next step&quot;</i>:</p><p><br></p><p><pre>
+class Requirement extends Monitor[Event] {
+  require {
+    case COMMAND(x) =>
+      weak {
+        case SUCCESS(`x`) => ok
+      }
+  }
+}
+</pre></p><p><br></p></div><dl class="paramcmts block"><dt class="param">block</dt><dd class="cmt"><p>partial function representing the transitions leading out of the state.</p></dd><dt>returns</dt><dd class="cmt"><p>the <i>weak state</i> formula.
+</p></dd></dl></div>
+    </li><li name="tracecontract.Formulas#weaknext" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="weaknext(formula:=&gt;Formulas.this.Formula):Formulas.this.Formula"></a>
+      <a id="weaknext(⇒Formula):Formula"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">weaknext</span><span class="params">(<span name="formula">formula: ⇒ <a href="Formulas$Formula.html" class="extype" name="tracecontract.Formulas.Formula">Formula</a></span>)</span><span class="result">: <a href="Formulas$Formula.html" class="extype" name="tracecontract.Formulas.Formula">Formula</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">True in the next step, if there is a next step (an LTL formula).</p><div class="fullcomment"><div class="comment cmt"><p>True in the next step, if there is a next step (an LTL formula).
+The formula <i>weaknext(f)</i> for some formula <i>f</i> is True iff. either there is no next step
+(it is the end of the trace), or if <i>f</i> is True in the next step.</p><p>At the end of the trace <i>weaknext(f)</i> evaluates to True independently of what <i>f</i> is.
+</p></div><dl class="paramcmts block"><dt class="param">formula</dt><dd class="cmt"><p>the formula that must be True in the next step, if there is a next step.
+The formula is called 'by name', which means that it is not evaluated until the next step.</p></dd><dt>returns</dt><dd class="cmt"><p>the <i>weaknext</i>-formula.
+</p></dd></dl></div>
+    </li><li name="tracecontract.Formulas#within" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="within(time:Int)(formula:Formulas.this.Formula):Formulas.this.Formula"></a>
+      <a id="within(Int)(Formula):Formula"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">within</span><span class="params">(<span name="time">time: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="params">(<span name="formula">formula: <a href="Formulas$Formula.html" class="extype" name="tracecontract.Formulas.Formula">Formula</a></span>)</span><span class="result">: <a href="Formulas$Formula.html" class="extype" name="tracecontract.Formulas.Formula">Formula</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">The formula must become True within the specified time.</p><div class="fullcomment"><div class="comment cmt"><p>The formula must become True within the specified time.
+The time must be given in milliseconds. This construct can be used when
+monitoring a system online, where events are processed as they are produced, and
+where the clock of the computer on which the monitor runs, is sufficient for measuring
+time critical performance.</p><p>The method should for example not be used to analyze
+log files containing events that have already previously been generated. Typically
+such events contain their own time stamps, and those should be used instead, treated
+just as any other data.
+</p></div><dl class="paramcmts block"><dt class="param">formula</dt><dd class="cmt"><p>the formula that must become True within the specified <i>time</i>.</p></dd><dt>returns</dt><dd class="cmt"><p>the <i>within</i>-formula.
+</p></dd></dl></div>
+    </li></ol>
+            </div>
+
+        
+
+        
+        </div>
+
+        <div id="inheritedMembers">
+        <div class="parent" name="scala.AnyRef">
+              <h3>Inherited from <span class="extype" name="scala.AnyRef">AnyRef</span></h3>
+            </div><div class="parent" name="scala.Any">
+              <h3>Inherited from <span class="extype" name="scala.Any">Any</span></h3>
+            </div>
+        
+        </div>
+
+        <div id="groupedMembers">
+        <div class="group" name="Ungrouped">
+              <h3>Ungrouped</h3>
+              
+            </div>
+        </div>
+
+      </div>
+
+      <div id="tooltip"></div>
+
+      <div id="footer">  </div>
+      <script defer="defer" type="text/javascript" id="jquery-js" src="../lib/jquery.js"></script><script defer="defer" type="text/javascript" id="jquery-ui-js" src="../lib/jquery-ui.js"></script><script defer="defer" type="text/javascript" id="tools-tooltip-js" src="../lib/tools.tooltip.js"></script><script defer="defer" type="text/javascript" id="template-js" src="../lib/template.js"></script>
+    </body>
+      </html>

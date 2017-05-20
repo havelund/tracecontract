@@ -1,0 +1,1558 @@
+<html>
+<head>
+
+<STYLE TYPE="text/css" MEDIA=screen>
+<!--
+pre {
+    color: #333;
+    background-color: #C9C299;
+    padding: 6px 4px 4px 6px;
+    border: 1px solid #eee;
+    border-left-width:20px;
+    line-height: 1.1;
+}
+-->
+</STYLE>
+
+<!--
+#C9C299
+-->
+
+<title>TraceContract Manual</title>
+</head>
+<body bgcolor="#ffffff">
+
+<br><br><br>
+
+<center>
+<font color=red>
+<h1><tt>TraceContract Manual</tt></h1>
+</font>
+</center>
+
+<br><br>
+
+
+<!----------------------------------------------------------------------->
+
+<font color=blue>
+<h2><tt>Table of Contents</tt></h2>
+</font>
+
+<ul>
+<li><a href="#intro">Introduction</a></li>
+<li><a href="#classes">Overview of Classes</a></li>
+<li><a href="#basicexample">Basic Example</a></li>
+<li><a href="#events">Events</a></li>
+<li><a href="#formulas">Formulas</a></li>
+<li><a href="#states">State Logic</a></li>
+<li><a href="#abbreviations">Abbreviations for Writing Properties</a></li>
+<li><a href="#statemachines">State Machines</a></li>
+<li><a href="#usingmonitors">Using Monitors</a></li>
+<li><a href="#ltl">Future Time Linear Temporal Logic</a></li>
+<li><a href="#facts">Reasoning About the Past by Recording Facts</a></li>
+<li><a href="#time">Specifying Real-Time Properties</a></li>
+</ul>
+
+
+<!----------------------------------------------------------------------->
+
+<br><font color=blue>
+<h2><tt><a name="intro">Introduction</a></tt></h2>
+</font>
+
+The tracecontract package facilitates analysis of traces. It allows to 
+write what we refer to as <i>trace contracts</i>. 
+
+<p>
+
+A trace is a sequence of events, typically produced by a running software system.
+Events can be of any type, but are typically objects of <i>case classes</i> 
+(to allow for pattern matching over them) that subclass some abstract 
+<i>Event</i> type. 
+
+<p>
+
+A trace contract is a class that extends the 
+<a href="../tracecontract/Monitor.html">Monitor</a> 
+class, and specifies which traces are  
+well-formed and which are not. A trace 
+contract can be seen as a predicate on traces. A trace contract consists 
+of one or more properties, where a property is a named <i>formula</i>. The 
+API provides several method to construct formulas in various 
+sub-logics, including LTL (Linear Temporal Logic), state machines, rule-based 
+systems, and liberal combinations thereof. 
+
+
+<!----------------------------------------------------------------------->
+
+<br><font color=blue>
+<h2><tt><a name="classes">Overview of Classes</a></tt></h2>
+</font>
+
+The package offers at the top level the classes illustrated in the following 
+class diagram, except for the blue class <code>UserDefinedTraceContract</code>, 
+which the user defines as an extension of the <code>Monitor</code> class. 
+All these classes are documneted in the
+<a href="../tracecontract/package.html">API documentation</a>.
+
+<br><br>
+
+<hr>
+<div align="center">
+<img src="class-diagram.jpg" width=700 alt="tracecontract class diagram">
+</div>
+<hr>
+
+<br>
+</p><h3><tt>Class DataBase</a></tt></h3>
+
+The class <code>DataBase</code> class, offers methods for a limited form of rule-based 
+programming, where facts can be stored and removed from a database, which 
+can be queried for fact membership. The database is typically used for 
+modeling past time logic properties: that some sequence of events must or 
+must not have happened in the past if some situation arises.
+
+</p><h3><tt><a name="P">Class Formulas</a></tt></h3>
+
+The <code>Formulas</code> class offers the type <code>Formula</code> of formulas, and methods 
+for formalizing properties using state machines and future time temporal logic,
+and combinations thereof.
+
+</p><h3><tt><a name="P">Class Monitor</a></tt></h3>
+
+The class <code>Monitor</code> offers all the methods needed for writing contracts, 
+including (by extension) those in its super classes <code>Database</code> and 
+<code>Formulas</code>. The new methods introduced in class <code>Monitor</code> are methods 
+for defining properties from formulas (for example <code>property</code>), for defining 
+sub-monitors (<code>monitors</code> - a monitor can be composed of other 
+monitors), and for finally verifying a sequence of events against the defined 
+properties (the <code>verify</code> methods). 
+
+Calling the <code>verify</code> methods will cause possible error messages to be printed 
+on standard out. However, results can also be obtained as data objects. That 
+is, after a sequence of events has been analyzed, indicated by a call of the 
+<code>end</code> method, the result of the verification can be obtained by a call of 
+the <code>getMonitorResult</code> method. The returned object is of type 
+<code>MonitorResult</code>.
+
+</p><h3><tt><a name="P">Class MonitorResult</a></tt></h3>
+
+An object of this class represents the result of a trace analysis. The method 
+<code>getPropertyResults</code> returns a list of <code>PropertyResult</code>, one for each 
+property in the monitor and all its sub-monitors.
+
+</p><h3><tt><a name="P">Class PropertyResult</a></tt></h3>
+
+For each property, there are two kinds of errors that can occur: <i>safety errors</i> 
+and <i>liveness errors</i>. A safety error represents the situation where an event 
+occurs, which should not occur (something bad happens). A liveness error 
+represents the situation where an event which should occur, doers not occur 
+(something good does not happen). The method <code>getSafetyErrors</code> returns 
+a list of the safety errors detected for that property, whereas the 
+method <code>getLivenessErrors</code> returns a list with the liveness errors 
+detected for that property.
+
+</p><h3><tt><a name="P">Classes SafetyError and LivenessError</a></tt></h3>
+
+An error, be it as safety or liveness error, is characterized by amongst 
+other things an error trace. The field <code>errorTrace</code> returns this 
+error trace.
+
+</p><h3><tt><a name="P">Error Trace</a></tt></h3>
+
+An error trace is a list of events, numbered according to their position 
+in the trace.
+
+
+<!----------------------------------------------------------------------->
+
+<br><font color=blue>
+<h2><tt><a name="basicexample">Basic Example</a></tt></h2>
+</font> 
+
+We shall illustrate TraceContract with a complete, self-contained,
+runnable example. The following code shows  
+what a user of TraceContract might write
+to monitor telemetry between a control center and
+a space craft. There is an event type <code>Event</code> defining what events are monitored.
+Each event type forms a subclass of this type.
+Subsequently a monitor <code>CommandRequirements</code> is defined, which contains two
+properties <code>R1</code> and <code>R2</code>. The first property 
+states that whenever a command is observed,
+a success should follow, with no fail before that. The second command
+says that a command should not succeed more than once.
+
+<br><br>
+<pre>
+<b>import</b> tracecontract.Monitor
+
+<font color=red>// Define event type:</font>
+
+<b>abstract class</b> Event
+<b>case class</b> COMMAND(name: String, nr: Int) <b>extends</b> Event
+<b>case class</b> SUCCESS(name: String, nr: Int) <b>extends</b> Event
+<b>case class</b> FAIL(name: String, nr: Int) <b>extends</b> Event
+
+<font color=red>// Define monitor:</font>
+
+<b>class</b> CommandRequirements <b>extends</b> Monitor[Event] {
+  property('R1) {
+    always {
+      <b>case</b> COMMAND(name, number) =>
+        hot {
+          <b>case</b> FAIL(`name`, `number`) => error
+          <b>case</b> SUCCESS(`name`, `number`) => ok
+        }
+    }
+  }
+
+  property('R2) {
+    always {
+      <b>case</b> SUCCESS(_, number) =>
+        state {
+          <b>case</b> SUCCESS(_, `number`) => error
+        }
+    }
+  }
+}
+
+<font color=red>// Use monitor:</font>
+
+<b>object</b> TraceAnalysis {
+  <b>def</b> main(args: Array[String]) {
+    <b>val</b> trace: List[Event] =
+      List(
+        COMMAND("STOP_DRIVING", 1),
+        COMMAND("TAKE_PICTURE", 2),
+        SUCCESS("TAKE_PICTURE", 2),
+        SUCCESS("TAKE_PICTURE", 2))
+
+    <b>val</b> monitor = <b>new</b> CommandRequirements
+    monitor.verify(trace)
+  }
+}
+</pre>
+<br>
+
+The monitor <code>CommandRequirements</code> is applied in the 
+<code>TraceAnalysis</code> object, where
+a trace is created (normally it would for example be read from a file) 
+and subsequently passed as argument to the <code>verify</code> method
+of the monitor. The output from executing the above Scala program is the following
+two error messages:
+
+<br><br>
+<pre>
+--- Monitor CommandRequirements ---
+
+Total number of errors: 2
+
+------------------------------
+Monitor: CommandRequirements
+Property 'R1 violated due to missing event
+
+Error trace:
+  1=COMMAND(STOP_DRIVING,1)
+------------------------------
+
+------------------------------
+Monitor: CommandRequirements
+Property 'R2 violated
+
+Violating event number 4: SUCCESS(TAKE_PICTURE,2)
+Error trace:
+  3=SUCCESS(TAKE_PICTURE,2)
+  4=SUCCESS(TAKE_PICTURE,2)
+</pre>
+<br>
+
+We shall in the following explain the details of the TraceContract DSL, 
+and introduce many other features than represented in the above example.
+
+
+<!----------------------------------------------------------------------->
+
+<br><font color=blue>
+<h2><tt><a name="events">Events</a></tt></h2>
+</font> 
+
+The first task to perform when writing a trace contract is to determine 
+what the events are to be monitored. TraceContract allows for events of 
+any Scala type to be monitored, for example integers, strings, maps, but perhaps more
+interestingly: objects of user-defined classes. 
+When we instantiate the <code>Monitor</code> class, we must provide the event type as argument.
+
+Typically, the user will define a type <code>Event</code> 
+(it can also have another name), in whatever way is suited. 
+The most typical way is to define event kinds as parameterized 
+<a href="http://www.scala-lang.org/node/107">case classes</a> 
+(to allow for pattern matching), all sub-classing the abstract 
+<code>Event</code> class. The following definitions illustrate event kinds representing 
+communication between a space craft and ground. There are commands submitted 
+to the space craft, identified by a command name and a command number (a command with the same name can for example be issued many times, command numbers increase by 1 for each new command), and reports of commands succeeding 
+or failing. 
+
+<br><br>
+<pre>
+<b>abstract</b> <b>class</b> Event
+<b>case</b> <b>class</b> COMMAND(name: String, nr: Int) <b>extends</b> Event
+<b>case</b> <b>class</b> SUCCESS(name: String, nr: Int) <b>extends</b> Event
+<b>case</b> <b>class</b> FAIL(name: String, nr: Int)    <b>extends</b> Event
+</pre>
+<br>
+
+An example of a trace of such events is the following:
+
+<br><br>
+<pre>
+<b>val</b> trace: List[Event] =  
+  List(
+    COMMAND("STOP_DRIVING", 1), 
+    COMMAND("TAKE_PICTURE", 2),
+    SUCCESS("TAKE_PICTURE", 2), 
+    SUCCESS("TAKE_PICTURE", 2)
+  )
+</pre>
+<br>
+
+Such a trace can potentially be constructed by parsing a log file produced
+by the rover software, for example using Scala's parser combinator or 
+regular expression packages. 
+
+
+<!----------------------------------------------------------------------->
+
+<br><font color=blue>
+<h2><tt><a name="formulas">Formulas</a></tt></h2>
+</font> 
+ 
+A Trace contract consists of a set of formulas to be checked.
+The class <code>Formulas</code> defines the type <code>Formula</code> of all formulas:
+
+<br><br>
+<pre>
+<b>abstract</b> <b>class</b> Formula
+</pre>
+<br>
+
+This class has several sub-classes, each representing a kind of formula.
+The user is unaware of these classes and is instead offered a set of 
+functions for producing such formula objects. An exception is the objects 
+<code>True</code> and <code>False</code>, which represent the fundamental truth values:
+
+<br><br>
+<pre>
+<b>object</b> False <b>extends</b> Formula
+<b>object</b> True  <b>extends</b> Formula
+</pre>
+<br>
+
+The functions <code>error</code> and <code>ok</code> are alternative names for 
+<code>False</code> and <code>True</code>.
+These functions also exists in overloaded versions taking a message
+(a String as argument) which is printed to standard out:
+
+<ul>
+
+<li> <b><code>def error : Formula</code></b><br>
+     Emits an error message and evaluates to <code>False</code>.
+     <br><br>
+
+<li> <b><code>def error(message: String): Formula</code></b><br>
+     Emits a user defined error message and evaluates to <code>False</code>.
+     <br><br>
+
+<li> <b><code>def ok : Formula</code></b><br>
+     Evaluates to <code>True</code>. 
+     <br><br>
+
+<li> <b><code>def ok(message: String): Formula</code></b><br>
+     Emits a user defined message and evaluates to <code>True</code>.
+     <br><br>
+
+</ul>
+
+There are different styles for defining formulas, including:
+state logic (including state machines), linear future time temporal logic (LTL),
+and fact storing past time logic (a form of rule-based programming). 
+We shall illustrate each of these styles below in the mentioned order, and we
+shall demonstrate how formulas are registered as properties for monitoring.
+
+
+<!----------------------------------------------------------------------->
+
+<br><font color=blue>
+<h2><tt><a name="states">State Logic</a></tt></h2>
+</font> 
+
+</p><h3><tt><a name="P">State Functions</a></tt></h3>
+
+State logic can be seen as an extension of traditional state machines
+with the following features:
+
+<br>
+
+<ul>
+  <li> states can be parameterised with data
+
+  <li> there are different kinds of states inspired by temporal logic 
+       operators. The operators differ wrt:
+
+         <ul>
+           <li> how they react to events that do not trigger transitions
+           <li> how they behave at the end of the trace. That is, whether they 
+                evaluate to <code>True</code> or <code>False</code>.
+           <li> whether they remain active after a transition is taken or not.
+         </ul>
+  <li> un-named (anonymous) states are allowed, thereby relieving the user 
+       from naming intermediate states in a progression of transitions.
+
+  <li> the target of a transition can be a conjunction (AND) of states as 
+       well as a disjunction (OR), corresponding to alternating automatae.
+</ul>
+
+These characteristics makes state logic very similar to a temporal logic.
+As in traditional state machines, the body of a state is a list of
+transitions leading out of the state. Such a list of transitions
+is in TraceContract called a <i>block</i>, and is represented by a partial
+function (or total for that matter) from events to formulas:
+
+<br><br>
+<pre>
+  type Block = PartialFunction[Event, Formula]
+</pre>
+<br>
+
+That is, the result of taking a transition is another formula
+(think: target state for a moment). An example of a block (of transitions) is:
+
+<br><br>
+<pre>
+  {
+    <b>case</b> FAIL(`name`,`number`) => error
+    <b>case</b> SUCCESS(`name`,`number`) => ok
+  }
+</pre>
+<br>
+
+This definition represents a partial function (lambda abstraction for the 
+reader familiar with this term) which is defined for <code>FAIL</code> and 
+<code>SUCCESS</code> events 
+that as parameters have the values of the variables name and number in the 
+current scope whatever it is (the quotes in Scala enforces the interpretation: 
+<i>the value of</i> during a pattern matching in contrast to binding to these names).
+
+There are 6 kinds of states, each represented as a function that takes a block 
+and returns a formula:
+
+<br>
+
+<ul>
+<li> <b><code>def always(block: Block): Formula</code></b><br>
+     An always state always waiting for an event to possibly match a transition.
+     For each matching event <i>e</i>, a new formula <i>block(e)</i> is added to the set of
+     formulas being monitored.<br><br>
+
+<li>  <b><code>def state(block: Block): Formula</code></b><br>
+      A state waiting for an event to possibly match a transition.
+      The first matching event <i>e</i> causes the state to evolve to 
+      <i>block(e)</i>.<br><br>
+
+<li>  <b><code>def hot(block: Block): Formula</code></b><br>
+      Same semantics as a <b>state</b> above, except that it is considered a violation
+      to end in a hot state at the end of the trace analysis. 
+      A hot state represents a liveness property: something has to happen 
+      eventually.<br><br>
+
+<li>  <b><code>def strong(block: Block): Formula</code></b><br>
+      A strong state expects an event to match a transition in the next step.
+      If not, or if there is no next step (at the end of the trace) it 
+      evaluates to <code>False</code>.<br><br>
+
+<li>  <b><code>def weak(block: Block): Formula></code></b><br>
+      Same semantics as <b>strong</b>, except it is not an error if there 
+      is no next step.<br><br>
+
+<li>  <b><code>def step(block: Block): Formula</code></b><br>
+      If <i>e</i> matches <i>block</i> then <i>block(e)</i>, else <code>True</code>.
+</ul>
+
+</p><h3><tt><a name="P">An Example</a></tt></h3>
+
+Let's illustrate this with an example. Consider as an example the following 
+two informal requirements:
+
+<br>
+
+<ul>
+
+<li> R<sub>1</sub>: <i>"Whenever a command is issued, it should eventually succeed 
+                with no failure occurring before then"</i>.
+
+<li> R<sub>2</sub>: <i>"A command must not succeed more than once"</i>.
+
+</ul>
+
+<br>
+
+These requirements can be formalized by the following monitor:
+
+<br><br>
+<pre>
+<b>class</b> R1_R2 <b>extends</b> Monitor[Event] {
+  property('R1) {
+    always {
+      <b>case</b> COMMAND(name, number) =>
+        hot {
+          <b>case</b> FAIL(`name`, `number`) => error
+          <b>case</b> SUCCESS(`name`, `number`) => ok
+        }
+    }
+  }
+
+  property('R2) {
+    always {
+      <b>case</b> SUCCESS(_, number) =>
+        state {
+          <b>case</b> SUCCESS(_, `number`) => error
+        }
+    }
+  }
+}
+</pre>
+<br>
+
+The monitor is defined as a class named <code>R1_R2</code>, which extends 
+the class <code>Monitor</code>,  which in turn is parameterized with the event type we 
+defined earlier. A trace contract uses the following function for adding 
+a formula to be checked:
+
+<ul>
+<li> <b><code>def property(name: Symbol)(formula: Formula): Unit</code></b><br>
+     Adds a named formula to be monitored.
+</ul>
+
+It is a curried function, which as first argument 
+takes the name of the property, and as second argument takes the formula to 
+be checked. The name is of type Symbol, which contains quoted names, such 
+as <code>'R1</code> and <code>'R2</code>,
+etc. The second argument to the property function is the formula:
+
+<br><br>
+<pre>
+  always { ... }
+</pre>
+<br>
+
+The always function takes a partial function as argument and
+creates a state, in which the monitor will wait
+until an event arrives for which the partial function is defined.
+When this happens, the partial function is applied to obtain a new
+formula, namely the right hand side of <code>=></code>. The always state 
+itself remains active, modeling continuous checking, and is the only state out 
+of the 6 that does so.
+
+We see that the block argument to the always function defines one transition 
+matching any command, binding the command name to <code>name</code> and binding
+the command number to <code>number</code>. The result of the transition is 
+a hot state, waiting for a fail or a success of that
+command. The names in the patterns are quoted (<code>`name`</code> and 
+<code>`number`</code>), which in Scala means: match the <u>value</u> 
+of these variable rather than bind to them. 
+
+The result of the transition is a hot state, which will
+remain waiting until an event arrives that matches the body. However,
+when such an event arrives, the net result is the value of the body --
+that is, there is no repetition as in the case of <b>always</b>. The hot state
+evaluates to <code>False</code> at the end of the
+trace, modeling in this scenario the requirement that we need to see a
+success before the end of the trace.
+
+<p>
+
+The property <code>'R2</code> is formulated with the <code>state</code> function.  
+The <code>state</code> function
+creates a state where the monitor will wait until a triggering event arrives
+that matches the body, in which case the state evaporates and an error  is
+emitted in this example. In contrast to a hot state, however, no error
+is issued if a monitor remains in such a state at the end of the trace.
+Such states are hence used to model safety properties.
+
+</p><h3><tt><a name="P">Conditional Sequences</a></tt></h3>
+
+The following example illustrates the functions <code>step</code> 
+and <code>next</code>. Consider the requirement:
+
+<ul>
+<li> R<sub>3</sub>: <i>"If a command is issued, and it subsequently at some 
+    later point succeeds, and if it succeeds again a second time immediately thereafter in the next step, then in the immediate subsequent step it must fail"</i>.
+</ul>
+
+Note that this requirement consists of two parts: a condition (a sequence of 
+events), and a consequence (another sequence of events, one event in this case) 
+that must happen in case the condition is satisfied. In the code below,
+the two parts are separated with a comment line for clarity (similar to
+<i>conditional message sequence diagrams</i>):
+
+<br><br>
+<pre>
+<b>class</b> R3 <b>extends</b> Monitor[Event] {
+  property ('R3) {
+    always {
+      <b>case</b> COMMAND(x,y) =>
+        state {
+          <b>case</b> SUCCESS(`x`,`y`) =>
+            step {
+              <b>case</b> SUCCESS(`x`,`y`) =>
+  // ----------------------------------------
+                strong {
+                  <b>case</b> FAIL(`x`,`y`) => ok
+                }
+            }
+        }
+    }
+  }
+}
+</pre>
+<br>
+
+<!----------------------------------------------------------------------->
+
+<br><font color=blue>
+<h2><tt><a name="abbreviations">Abbreviations for Writing Properties</a></tt></h2>
+</font>
+
+A typical pattern used when writing state logic properties is the following:
+
+<br><br>
+<pre>
+<b>class</b> R <b>extends</b> Monitor[Event] {
+  ...
+  property('PropertyName) {
+    always {
+      <b>case</b> EVENT1(...) => ...
+      <b>case</b> EVENT2(...) => ...   
+    }
+  }
+  ...
+}
+</pre>
+<br>
+
+Two observations: (1) the property is named, and (2)
+<code>property</code> and <code>always</code> usually go 
+together when using state logic. 
+A collection of functions allow us to omit the name in case there 
+is only one property in a monitor (in this case the monitor name suffices 
+as identification), and to combine the call of <code>property</code> as well 
+as <code>always</code> into a call of one function:
+
+<ul>
+
+<li> <b><code>def property(formula: Formula): Unit</code></b><br>
+Defines an unnamed property to be monitored. The property is defined by 
+a formula. This method can be used when the monitor only contains one property, 
+in which case the name of the monitor suffices to identify the property.
+<br><br>
+
+<li> <b><code>def requirement(name: Symbol)(block: Block): Unit</code></b><br>
+Defines a named block to be always monitored. A call of the form:
+<code>requirement(name){block}</code>
+is a shorthand for:
+<code>property(name){always{block}}</code>.
+<br><br>
+
+<li> <b><code>def require(block: Block): Unit</code></b><br>
+Defines an unnamed block to be always monitored. A call of the form:
+<code>require{block}</code>
+is a shorthand for:
+<code>property{always{block}}</code>.
+
+</ul>
+
+For example, the monitor <code>R3</code> can be written as:
+
+<br><br>
+<pre>
+<b>class</b> R3_ <b>extends</b> Monitor[Event] {
+  require {
+    <b>case</b> COMMAND(x,y) =>
+      state {
+        <b>case</b> SUCCESS(`x`,`y`) =>
+          step {
+            <b>case</b> SUCCESS(`x`,`y`) =>
+  // ----------------------------------------
+              strong {
+                <b>case</b> FAIL(`x`,`y`) => ok
+              }
+          }
+      }
+  }
+}
+</pre>
+<br>
+
+We shall use these more succinct functions from now on whereever, appropriate.
+
+
+<!----------------------------------------------------------------------->
+
+<br><font color=blue>
+<h2><tt><a name="statemachines">State Machines</a></tt></h2>
+</font>
+
+It is possible to name states, as one will do when writing traditional state 
+machines. 
+
+<h3><tt>Reformulating R1</tt></h3>
+
+The following example illustrates property <code>R1</code> 
+expressed in an alternative style, where the hot state has been moved to 
+a function that returns the hot state:
+
+<br><br>
+<pre>
+<b>class</b> R1 <b>extends</b> Monitor[Event] {
+  require {
+    <b>case</b> COMMAND(name, number) => ExpectSuccess(name,number)
+  }
+
+  <b>def</b> ExpectSuccess(name: String, number: Int): Formula =
+    hot {
+      <b>case</b> FAIL(`name`, `number`) => error
+      <b>case</b> SUCCESS(`name`, `number`) => ok
+    }
+}
+</pre>
+<br>
+
+This illustrates how we use Scala's functions to name states. As functions, they
+can be parameterized, as in this case with the command name and number.
+
+
+<h3><tt>Traditional State Machines</tt></h3>
+
+We can also more write traditional state machines with loops. Consider the requirement:
+
+<ul>
+<li> R<sub>4</sub>: <i>"We should see commands be issued one at a time - each command shall succeed before the next is issued"</i>.
+</ul>
+
+This property can be expressed as the following state machine:
+
+<br><br>
+<pre>
+<b>class</b> R4 <b>extends</b> Monitor[Event] {
+  property { S1 }
+
+  <b>def</b> S1 : Formula =
+    state {
+      <b>case</b> COMMAND(name,number) => S2(name,number)
+      <b>case</b> _ => error
+    }
+
+  <b>def</b> S2(name: String, number: Int): Formula =
+    state {
+      <b>case</b> SUCCESS(`name`,`number`) => S1
+      <b>case</b> _ => error
+    }
+}
+</pre>
+<br>
+
+The state machine loops between states <code>S1</code> and <code>S2</code>.
+State <code>S2</code> is parameterized. The initial state of the state machine is
+state <code>S1</code> since this is the state that is defined as the property
+<code>'R4</code>. 
+
+<p>
+
+Due to the mutually recursive definition of <code>S1</code> and <code>S2</code>,
+Scala's type system requires us to explicitely indicate 
+the type of state <code>S1</code>, namely: <code>Formula</code>.
+
+<h3><tt>Side Effects and Conditions</tt></h3>
+
+The following example illustrates how state machines can have side effects 
+beyond transitioning from one state to another, how transitions can be guarded, 
+the use of Boolean expressions as formulas, and conjunction of taget states.
+Consider the requirement:
+
+<ul>
+<li> R<sub>5</sub>: <i>"Consecutive command numbers should increase by exactly 1, and a command (name) should not be re-issued with a new number until a success has occurred"</i>.
+</ul>
+
+In addition, let's collect the names of the commands issued and store them in a set for 
+later printing. The property can be stated as follows:
+
+<br><br>
+<pre>
+<b>class</b> R5 <b>extends</b> Monitor[Event] {
+  <b>var</b> commands: Set[String] = Set() 
+
+  require {
+    <b>case</b> COMMAND(name, number) =>
+      commands += name 
+      increaseCmdNumber(number) and holdCmd(name, number) 
+  }  
+
+  <b>def</b> increaseCmdNumber(number: Int) =
+    state {
+      <b>case</b> COMMAND(_, number2) => number2 == number+1 
+    }
+
+  <b>def</b> holdCmd(name: String, number: Int) =
+    state {
+      <b>case</b> COMMAND(`name`,number2) <b>if</b> number2 != number => error 
+      <b>case</b> SUCCESS(`name`, `number`) => ok
+    }
+
+  <b>override</b> <b>def</b> finish() {
+    println("commands issued: " + commands)
+  }
+} 
+</pre>
+<br>
+
+Note how the Boolean expression <code>number2 == number+1</code> occurs as a formula
+in the <code>increaseCmdNumber</code> function.
+This is possible due to the following implicit conversion function:
+
+<ul>
+<li> <b><code>implicit def convBoolean2Formula(cond: Boolean): Formula</code></b><br>
+    Implicit conversion from Boolean to <code>Formula</code>. 
+    This allows to write a Boolean expression 
+    as a formula, with the obvious semantics. 
+</ul>
+
+Note also how the two states <code>increaseCmdNumber</code> and 
+<code>holdCmd</code> are composed with a conjunction, 
+resulting in an AND-semantics, meaning that none of the states are 
+allowed to fail in this case.
+TraceContract allows conjunction 
+(<i>f<sub>1</sub></i> <code>and</code> <i>f<sub>2</sub></i>) 
+as well as disjunction
+(<i>f<sub>1</sub></i> <code>or</code> <i>f<sub>2</sub></i>)
+of states corresponding to AND/OR automata. 
+We will discuss logic
+operators in more detail in Section: 
+<a href="#ltl">Future Time Linear Temporal Logic</a>.
+<p>
+The example also illustrates overriding of the method:
+
+<ul>
+
+<li> <b><code>protected def finish(): Unit</code></b><br>
+Method that is called when trace analysis terminates. By default the method 
+has no effect (has an empty body). The method can be overridden in case 
+special actions are wanted at the end of a trace analysis, such as for 
+example printing out statistical information collected in the monitor. 
+
+</ul>
+
+It is possible to write a monitor that does not transition between different states, 
+but which just updates monitor local variables as events come in. 
+For example, the following monitor collects the commands observed in a set, 
+and prints them out at the end of the trace:
+
+<br><br>
+<pre>
+<b>class</b> CollectNames <b>extends</b> Monitor[Event] {
+  <b>var</b> commands : Set[String] = Set()
+
+  require {
+    <b>case</b> COMMAND(x, _) => commands += x
+  }
+
+  <b>override</b> <b>def</b> finish() {
+    println("commands issued: " + (commands.mkString("{",",","}")))
+  }
+}
+</pre>
+<br>
+
+The assignment statement <code>commands += x</code> is of type Unit. 
+That is not a <code>Formula</code>. How does that work?
+The answer is that the following
+implicit conversion function lifts the Unit value to <code>True</code>:
+
+<ul>
+
+<li> <b><code>implicit def convUnitToFormula(unit: Unit): Formula</code></b><br>
+     Implicit conversion from the Unit value to <code>Formula</code>. 
+     This allows to write a block of code 
+     (returning the Unit value, hence only executed for its side effect) as a formula. The 
+     result is the side effect and the returned formula is <code>True</code>. 
+
+</ul>
+
+
+<!----------------------------------------------------------------------->
+
+<br><font color=blue>
+<h2><tt><a name="usingmonitors">Using Monitors</a></tt></h2>
+</font>
+
+Let is return to how we use monitors. The introductory example showed how
+we can instantiate a monitor, which contains a number of properties. However,
+since we have defined many monitors above, we need a way to combine them
+in a compositional manner. 
+The following illustates how we compose the monitors <code>R1</code>, 
+<code>R2</code> and <code>R3</code> defined above into
+a new monitor <code>Requirements</code>, which we then use in the class 
+<code>TraceAnalysis</code> to analyze a trace we get from somewhere.
+
+<br><br>
+<pre>
+<b>class</b> Requirements <b>extends</b> Monitor[Event] {
+  monitor(<b>new</b> R1_R2, <b>new</b> R3, <b>new</b> R4)
+}
+
+<b>class</b> TraceAnalysis {
+  <b>def</b> readTrace(): List[Event] = ...
+
+  <b>def</b> main(args: Array[String]) {
+    <b>val</b> monitor = <b>new</b> Requirements
+    <b>val</b> trace = readTrace()
+    monitor.verify(trace)
+  }
+}
+</pre>
+<br>
+
+The type of traces and two functions are used:
+
+<ul>
+
+<li> <b><code>type Trace = List[Event]</code></b><br>
+The type of traces.
+<br><br>
+
+<li> <b><code>def monitor(monitors: Monitor[Event]*): Unit</code></b><br>
+Adds monitors as sub-monitors to the current monitor. Whenever a method is called on the parent monitor (<code>this</code>), this method will also be called on the sub-monitors as well, recursively to the leaf monitors. This allows a hierarchical composition of monitors, and operation of them all in a single call.
+<br><br>
+
+<li>  <b><code>def verify(trace: Trace): Unit</code></b><br>
+Verifies a trace (list of events) against the properties and sub-monitors of 
+the monitor. The events are one by one forwarded to each property evaluator, 
+and to each sub-monitor. The method <code>end()</code> should not be called after this method.
+
+</ul>
+
+The example above illustrates a scenario where the entire trace is passed to the 
+<code>verify</code> function.
+However, TraceContract also offers the option of providing the events one by one
+as in the following alternative formulation of the <code>TraceAnalysis</code> class:
+
+<br><br>
+<pre>
+<b>class</b> AlternativeTraceAnalysis {
+  <b>def</b> readTrace(): List[Event] = ...
+
+  <b>def</b> main(args: Array[String]) {
+    <b>val</b> monitor = <b>new</b> Requirements
+    <b>val</b> trace = readTrace()
+    <b>for</b>(event <- trace) monitor.verify(event)
+    monitor.end()
+  }
+}
+</pre>
+<br>
+
+This alternative trace analysis module uses the following two functions, that
+must be used together:
+
+<ul>
+
+<li> <b><code>def verify(event: Event): Unit</code></b><br>
+Verifies an individual event against the properties and sub-monitors of the monitor. 
+The event is forwarded to each property evaluator, and to each sub-monitor.
+When trace analysis is done using this method, the method <code>end()</code> must be 
+called to terminate the analysis.
+<br><br>
+
+<li>  <b><code>def end(): Unit</code></b><br>
+Ends a trace analysis. This method must be called at the end of the trace 
+analysis in case the method <code>verify(event: Event)</code> 
+has been called one or more times. 
+
+</ul>
+
+These functions can for example be used to monitor an application <i>online</i> as
+it executes. 
+
+
+<!----------------------------------------------------------------------->
+
+<br><font color=blue>
+<h2><tt><a name="ltl">Future Time Linear Temporal Logic</a></tt></h2>
+</font>
+
+TraceContract offers a set of functions for writing 
+<a href="http://en.wikipedia.org/wiki/Linear_temporal_logic">
+Linear Temporal Logic (LTL)
+</a> 
+formulas. 
+
+LTL allows one to write properties such as: something has to be true now (an event), 
+something must be true globally from now on (<code>globally</code>), something must be true 
+eventually (<code>eventually</code>), 
+or something must be true until something else becomes true (<code>until</code>).
+LTL extends propositional logic, including negation (<code>not</code>), 
+conjunction (<code>and</code>), 
+disjunction (<code>or</code>), and implication (<code>implies</code>). 
+The basic atomic formulas are events: an event occuring as
+a formula represents the requirement that the incoming event equals this event.
+Formulas can be written as pure LTL, or can be mixed with state logic 
+in interesting ways. 
+
+<h3><tt>The LTL Functions</tt></h3>
+
+Let's get more concrete. The functions are partly defined in the class 
+<a href="../tracecontract/Formulas.html">Formulas</a> 
+(the prefix operators) and partly in the class 
+<code>Formula</code> defined within <code>Formulas</code>  
+(the infix operators). 
+
+<p>
+
+The entire set of functions related to LTL are presented below. Note that we have not used
+typical LTL operator notation such as <code>[]p</code> and <code><>p</code> 
+(for <code>globally(p)</code> and <code>eventually(p)</code>) due to the fact
+that some of the characters are not allowed as operator symbols, and due to the fact that we 
+are not convinced the operator notation is more convenient due to the resulting
+random mix of alphabetic
+names and symbols. However, a future version will offer both options.
+
+<p>
+
+<font color=orange><h4>In class <code>Monitor</code> (inherited from <code>Formulas</code>):</h4></font> 
+
+<ul>
+<li> <b><code>implicit def convEvent2Formula(event: Event): Formula</code></b><br>
+     Implicit conversion from <code>Event</code> to <code>Formula</code>. 
+     This allows to write an event as a formula, 
+     with the semantics that the observed event must be equal to it. 
+     <br><br>
+<li> <b><code>def matches(predicate: PartialFunction[Event, Boolean]): Formula</code></b><br>
+     Matches current event against a predicate. 
+     The formula <code>matches(pred)</code> is <code>True</code> if and 
+     only if <code>pred</code> is defined for the current event <code>e</code>, 
+     and furthermore <code>pred(e) == true</code>.
+     <br><br>
+<li> <b><code>def not(formula: Formula): Formula</code></b><br>
+      Boolean negation.
+     <br><br>
+<li> <b><code>def globally(formula: Formula): Formula</code></b><br>
+      Globally true. <code>formula</code> must be <code>True</code> 
+      from now on and in all future steps.
+      Evaluates to <code>True</code> at the end of the trace 
+      independently of what <code>formula</code> is.
+     <br><br>
+<li> <b><code>def eventually(formula: Formula): Formula</code></b><br>
+      Eventually true. The <code>formula</code> must become <code>True</code> 
+      at some future point.
+      Evaluates to <code>False</code> at the end of the trace.
+     <br><br>
+<li> <b><code>def never(formula: Formula): Formula</code></b><br>
+      Never true. <code>formula</code> must be <code>False</code> 
+      from now on and in all future steps.
+      Evaluates to <code>True</code> at the end of the trace 
+      independently of what <code>formula</code> is.
+     <br><br>
+<li> <b><code>def strongnext(formula: Formula): Formula</code></b><br>
+      <code>True</code> in the next step. The formula is <code>True</code> 
+      iff. there is a next step 
+      (it is not the end of the trace), and <code>formula</code> is <code>True</code> 
+      in the next step.
+      Evaluates to <code>False</code> at the end of the trace.
+     <br><br>
+<li> <b><code>def weaknext(formula: Formula): Formula</code></b><br>
+      <code>True</code> in the next step, if there is a next step. The 
+      formula is <code>True</code> iff. either there is no 
+      next step, or there is a next step and <code>formula</code> is <code>True</code> 
+      in the next step.
+      Evaluates to <code>True</code> at the end of the trace.
+</ul>
+
+<font color=orange><h4>In class Formula (permitting infix notation):</h4></font>
+
+<ul>
+
+<li> <b><code>def and(that: Formula): Formula</code></b><br>
+     Logical and. Allows us to write: <i>f and g</i>, for two formulas <i>f</i> and <i>g</i>.
+     <br><br>
+
+<li> <b><code>def or(that: Formula): Formula</code></b><br>
+     Logical or. Allows us to write: <i>f or g</i>, for two formulas <i>f</i> and <i>g</i>.
+     <br><br>
+
+<li> <b><code>def implies(that: Formula): Formula</code></b><br>
+     Logical implication. Allows us to write: <i>f implies g</i>, for two formulas <i>f</i> and <i>g</i>.
+     <br><br>
+
+<li> <b><code>def until(that: Formula): Formula</code></b><br>
+     Allows us to write: <i>f until g</i>, for two formulas <i>f</i> and <i>g</i>.
+     This will mean: eventually <i>g</i> must become <code>True</code>, 
+     and until then <i>f</i> must be <code>True</code> 
+     in every step (including now, but excluding the point where <i>g</i> becomes 
+     <code>True</code>).
+     <br><br>
+
+<li> <b><code>def unless(that: Formula): Formula</code></b><br>
+     Allows us to write: <i>f unless g</i>, for two formulas <i>f</i> and <i>g</i>.
+     This will mean: <i>f</i> must be <code>True</code> 
+     in every step until <i>g</i> becomes <code>True</code> or 
+     till the end of the trace if <i>g</i> never becomes <code>True</code>.
+
+</ul>
+
+<h3><tt>Example 1 - Being Specific about Parameters</tt></h3>
+
+Consider the following two requirements:
+
+<ul>
+
+<li> R<sub>6</sub>: <i>"Any <code>STOP_DRIVING</code> command number <i>10</i> 
+should eventually be followed by a success without a failure in between"</i>.
+
+<li> R<sub>7</sub>: <i>"Any successful <code>STOP_DRIVING</code> command number <i>10</i> 
+should not be followed by another success but should be followed by a 
+<code>TAKE_PICTURE</code> command number <i>11</i>"</i>.
+
+</ul>
+
+The following monitor formalizes these requirements as LTL formulas:
+
+<br><br>
+<pre>
+<b>class</b> R6_R7 <b>extends</b> Monitor[Event] {
+  property ('R6) {
+    globally {
+      COMMAND("STOP_DRIVING",10) implies
+        (not(FAIL("STOP_DRIVING",10)) until SUCCESS("STOP_DRIVING",10))
+    }
+  }
+
+  property ('R7) {
+    globally {
+      SUCCESS("STOP_DRIVING",10) implies
+        weaknext {
+          never {SUCCESS("STOP_DRIVING",10)}
+        } and
+       eventually(COMMAND("TAKE_PICTURE",11))
+    }
+  }
+}
+</pre>
+<br>
+
+Several observations:
+
+First,
+The atomic formulas are events: 
+<code>COMMAND("STOP_DRIVING",10)</code>,
+<code>FAIL("STOP_DRIVING",10)</code>,
+<code>SUCCESS("STOP_DRIVING",10)</code>, and
+<code>COMMAND("TAKE_PICTURE",11)</code>. Events can occur as formulas due to the
+implicit conversion function <code>convEvent2Formula(event: Event): Formula</code>.
+
+Second, we use <code>globally(formula: Formula): Formula</code> 
+instead of <code>always(block: Block): Formula</code> (as we did in state logic)
+for expressing that a formula must be true in every future step. This is simply
+because an LTL formula is not a block.
+
+Third, we need to use <code>weaknext</code> in <code>R7</code> in order to avoid
+applying <code>never</code> to the first observed <code>SUCCESS("STOP_DRIVING",10)</code>
+event.
+
+The same property can be stated also in state logic. The reader is challenged to try.
+
+
+<h3><tt>Example 2 - Being Loose About Parameters</tt></h3>
+
+Note that in the last monitor above all events are fully specified. For example, 
+we are  explicit about both command name and command number. This might be 
+acceptable for some situations, but in this case it becomes a little restricting. 
+What if for example we want to be agnostic about command numbers, not requiring any
+constraints on these at all. 
+Consider the following requirement, which is agnostic
+about command numbers:
+
+<ul>
+
+<li> R<sub>8</sub>: <i>"Ignoring command numbers, any command with 
+name <code>STOP_DRIVING</code> should eventually be followed by a 
+success without a failure in between"</i>.
+
+</ul>
+
+One solution is to use the function:
+<code>matches(predicate: PartialFunction[Event,Boolean]):Formula</code>,
+to match against events, as in the following example:
+
+<br><br>
+<pre>
+<b>class</b> R8 <b>extends</b> Monitor[Event] {
+  property {
+    globally {
+      commandStop implies (not(failStop) until successStop)
+    }
+  }
+
+  <b>def</b> commandStop = matches {
+    <b>case</b> COMMAND("STOP_DRIVING", _) => true
+  }
+
+  <b>def</b> failStop = matches {
+    <b>case</b> FAIL("STOP_DRIVING", _) => true
+  }
+
+  <b>def</b> successStop = matches {
+    <b>case</b> SUCCESS("STOP_DRIVING", _) => true
+  }
+}
+</pre>
+<br>
+
+We have for convenience wrapped the calls of <code>matches</code> into functions. However,
+calls of <code>matches</code> can occur as formulas anywhere a formula can occur.
+
+<h3><tt>Example 3 - Being Loose About and Connecting Parameters</tt></h3>
+
+Consider now that we want to formalize the very first requirement <i>R<sub>1</sub></i>:
+<i>"Whenever a command is issued (any name, any number), it should eventually 
+succeed (same name, same number) with no failure occurring before then 
+(same name, same number)"</i>, but 
+this time using LTL as much as possible. The key point here is that we want the 
+success to refer to the same name and number as the 
+command and we want to monitor this for any command and any number. Let's first 
+repeat how we will formalize this requirement using state logic (with the shorthands
+we have introduced for defining properties - the function <code>require</code> 
+specifically):
+
+<br><br>
+<pre>
+<b>class</b> R1_SL <b>extends</b> Monitor[Event] {
+  require {
+    <b>case</b> COMMAND(name, number) =>
+      hot {
+        <b>case</b> FAIL(`name`, `number`) => error
+        <b>case</b> SUCCESS(`name`, `number`) => ok
+      }
+  }
+}
+</pre>
+<br>
+
+Using LTL instead it becomes:
+
+<br><br>
+<pre>
+<b>class</b> R1_LTL <b>extends</b> Monitor[Event] {
+  require {
+    <b>case</b> COMMAND(name, number) =>
+      not(FAIL(name, number)) until SUCCESS(name, number)
+  }
+}
+</pre>
+<br>
+
+As we can see, we have here mixed pattern matching with LTL. 
+State logic can most often be used instead of LTL, and it might be
+an advantage to stick to the same style all over. It is a matter of taste, 
+however, and only practical experience will show what is most popular.
+
+
+<br><font color=blue>
+<h2><tt><a name="facts">Reasoning About the Past by Recording Facts</a></tt></h2>
+</font>
+
+The logics we have shown so far (state logic and LTL) in themselves 
+mainly support reasoning about the future: 
+<i>if something happens now, then from now on something else should not happen, or 
+something else should eventually happen</i>. They are not applicable for past time logic.
+We ignore here for a moment that all of Scala is always available, and hence we can
+express any computable monitor.
+As an example of a requirement referring to the past, consider the following:
+
+<ul>
+
+<li> R<sub>9</sub>: 
+<i>"A failure should only occur if a command (same name and number) 
+has been observed in the past, and no success has been observed so far since 
+then (same name and number)"</i>.
+
+</ul>
+
+To formulate this property, we need to keep track of what commands have been issued 
+that have not yet succeeded, such that when we see a fail, we can check that the 
+command is one of those tracked.
+
+Of course, since this API is built in Scala, Scala can at any time be used to model 
+such a property, for example by introducing a database (a set for example) of commands 
+issued but not yet succeeded. However, TraceContract offers direct support for this, 
+which may make the specification task easier.
+
+The general idea is to  support recording of historical facts in a database, which can then
+be queried. The library offers specifically the following constructs:
+
+<font color=orange><h4>In class <code>DataBase</code> (inherited via <code>Monitor</code>):</h4></font> 
+
+<ul>
+
+<li> <b><code><b>abstract</b> class Fact</code></b><br>
+     Facts to be added to and removed from the fact database.
+     Any fact has to be defined as an object of a class extending this class.
+     <br><br>
+
+<li> <b><code>def factExists(pred: PartialFunction[Fact, Boolean]): Boolean</code></b><br>
+     Tests whether the database contains a fact, which satisfies a predicate.
+     Returns true iff. a fact <i>f</i> exists in the database, for which <i>pred(f)</i> holds.
+     <br><br>
+
+<li> <b><code>implicit def convFact2FactOps(fact: Fact): FactOps</code></b><br>
+     Converts a fact to a <code>FactOps</code> object, which defines operations on the fact
+     for adding it to the database, removing it, or asking whether it is in the database.
+</ul>
+
+<font color=orange><h4>In class <code>FactOps</code> (provided by class <code>DataBase</code>):</h4></font> 
+
+<ul>
+
+<li> <b><code>def + : Unit</code></b><br>
+     Adds the fact to the fact database in the next step.
+     <br><br>
+
+<li> <b><code>def - : Unit</code></b><br>
+     Deletes the fact from the fact database in the next step.
+     <br><br>
+
+<li> <b><code>def ? : Boolean</code></b><br>
+     Tests that the fact is in the fact database.
+     Returns true iff. fact is in the database.
+     <br><br>
+
+<li> <b><code>def ~ : Boolean</code></b><br>
+     Tests that the fact is not in the database.
+     Returns true iff. fact is not in database.
+
+     <br><br>
+
+<li> <b><code>def ~+ : Boolean</code></b><br>
+     Tests that the fact is not in the database, and adds the fact in the next step.
+     Returns true iff. the fact is not in the database.
+     <br><br>
+
+<li> <b><code>def ?- : Boolean</code></b><br>
+     Tests that the fact is in the database, and removes the fact in the next step.
+     Returns true iff. the fact is in the database.
+
+</ul>
+
+Note that a test for membership of the database applies to the current database,
+whereas the addition to and removal from the database applies in the next step.
+
+<p>
+
+Requirement <i>R<sub>9</sub></i> can be formulated as follows:
+
+<br><br>
+<pre>
+<b>class</b> R9 <b>extends</b> Monitor[Event] {
+  <b>case</b> <b>class</b> Commanded(name: String, number: Int) <b>extends</b> Fact
+
+  require {
+    <b>case</b> COMMAND(name, number) => Commanded(name, number) +
+    <b>case</b> SUCCESS(name, number) => Commanded(name, number) -
+    <b>case</b> FAIL(name, number) <b>if</b> Commanded(name, number) ~ => error
+  }
+}
+</pre>
+<br>
+
+First a fact <code>Commanded</code> is defined. The property then updates the database 
+in the first two transitions (adds respectively deletes a fact) and 
+finally queries the database in the third 
+transition: gives an error if the fact is not in the database.
+
+
+<br><font color=blue>
+<h2><tt><a name="time">Specifying Real-Time Properties</a></tt></h2>
+</font>
+
+TraceContract can check for real-time properties <i>online</i> (monitoring a system at the
+same time it executes) as well as <i>offline</i> (analyzing a log file). 
+
+</p><h3><tt>Monitoring Real-Time Properties Online</a></tt></h3>
+
+In <i>online</i> mode, TraceContract is assumed to run in
+parallel with the system being monitored. Monitors use the clock
+of the computer on which TraceContract is running to measure time.
+The expiring of time limits is modeled through timers. Specifically,
+the following function is offered:
+
+<ul>
+
+<li> <b><code>def within(time: Int)(formula: Formula): Formula</code></b><br>
+     Evaluates as <code>formula</code> until it becomes <code>False</code>
+     or <code>True</code> or until the time (indicated in
+     milliseconds) expires, whichever comes first.
+     In the latter case, what remains of 
+     <code>formula</code> is evaluated as if 
+     it was the end of the trace. For example <code>eventually(...)</code>
+     evaluates to <code>False</code>, and <code>globally(...)</code>
+     evaluates to <code>True</code>.
+</ul>
+
+As an example, consider the following two requirements:
+
+<ul>
+
+<li> R<sub>10</sub>: 
+    <i>"Whenever a command is issued, it should succeed within 10 seconds"</i>.
+
+
+<li> R<sub>11</sub>: 
+    <i>"Whenever a command is issued, it will not fail during the next 10 seconds"</i>.
+
+</ul>
+
+The following monitor formalizes these two requirements:
+
+<br><br>
+<pre>
+<b>class</b> R10_R11 <b>extends</b> Monitor[Event] {
+  requirement ('R10) {
+    <b>case</b> COMMAND(name, number) => within (10 seconds) {eventually{SUCCESS(name,number)}}
+  }
+
+  requirement ('R11) {
+    <b>case</b> COMMAND(name, number) => within (10 seconds) {never{FAIL(name,number)}}
+  }
+}
+</pre>
+<br>
+
+Property <code>'R10</code> models a bounded liveness property. 
+Note the expression: <code>10 seconds</code>. This is made possible by an implicit conversion
+from integers to the class <code>IntOps</code>, which provides functions, such as <code>seconds</code>,
+which converts into milliseconds (in this case multiplies with <t>1000</i>).
+
+Property <code>'R11</code> models a bounded safety property.
+After 10 seconds this property will evaluate to <code>True</code>, 
+if there has not occured a <code>FAIL</code>
+during the 10 seconds. That is, at the end of the trace a <code>never(f)</code> formula
+evaluates to <code>True</code>.
+
+
+</p><h3><tt>Monitoring Real-Time Properties Offline</a></tt></h3>
+
+In the case of log file analysis, however, events have already been produced at a 
+time earlier than log analysis time, and we do not have any way of measuring the 
+time intervals between events beyond observing time stamps that the events might 
+potentially carry themselves. Hence, for offline analysis, we must assume that 
+events are time stamped. Such time stamps are analyzed just like any other data.
+
+<p>
+
+Assume that we extend our definition of the type <code>Event</code> by
+adding some new timestamped events (note, we do not change the definition of the
+abstract class <code>Event</code> itself, we just add some more sub-classes):
+
+<br><br>
+<pre>
+<b>case</b> <b>class</b> tCOMMAND(name: String, nr: Int, time: Int) <b>extends</b> Event
+<b>case</b> <b>class</b> tSUCCESS(name: String, nr: Int, time: Int) <b>extends</b> Event
+<b>case</b> <b>class</b> tFAIL(name: String, nr: Int, time: Int) <b>extends</b> Event
+</pre>
+<br>
+
+Consider the requirement
+<i>R<sub>10</sub>: "Whenever a command is issued, it should succeed within 10 seconds"</i>
+from before. Let's formalize this requirement as a property of a log file with 
+the above time stamped events (we call it version 1):
+
+<br><br>
+<pre>
+<b>class</b> R10_v1 <b>extends</b> Monitor[Event] {
+  require {
+    <b>case</b> tCOMMAND(name, number, time1) =>
+      hot {
+        <b>case</b> tSUCCESS(`name`, `number`, time2) <b>if</b> (time1, time2) within (10 seconds) => ok
+      }
+  }
+}
+</pre>
+<br>
+
+The expression <code>(time1,time2) within (10 seconds)</code> really stands for
+<code>time2-time1 <= 10*1000</code>. The integer pair <code>(time1,time2)</code>
+is by an implicit conversion function lifted to an object of class <code>IntPairOps</code>,
+in which the method <code><b>def</b> within(z: Int) = (y - x) <= z</code> is defined.
+The success transition triggers when a success event is observed within the right period 
+(<i>10</i> seconds). If this does not happen, we will end up with a hot state at the
+end of the trace, which will be a violation.
+
+<p>
+
+Suppose, however, that a success event occurs later, beyond <i>10</i>
+seconds. Even in this case, however, the transition above will never trigger. 
+The monitor will namely wait
+for a <b>timely</b> success event until the end of the trace, in which case 
+a hot-state error will be 
+issued. If we want an error message sooner than that, and we don't want such "dead" 
+monitors to "hang around" beyond their time has "expired", which need to code it 
+differently. 
+
+<p>
+
+The following formulation of the property triggers on the first otherwise 
+correct success command, and then returns the Boolean test on the time 
+difference:
+
+<br><br>
+<pre>
+<b>class</b> R10_v2 <b>extends</b> Monitor[Event] {
+  require {
+    <b>case</b> tCOMMAND(name, number, time1) =>
+      hot {
+        <b>case</b> tSUCCESS(`name`, `number`, time2) => (time1, time2) within (10 seconds)
+      }
+  }
+}
+</pre>
+<br>
+
+We could be even more demanding, and require an error message as soon as an event 
+(any event) is seen which violates the time constraint. In order to model this, 
+we will need to introduce a time value in the abstract <code>Event</code> class as follows:
+
+<br><br>
+<pre>
+<b>abstract</b> <b>class</b> TimedEvent {<b>val</b> time: Int}
+<b>case</b> <b>class</b> teCOMMAND(name: String, nr: Int, time: Int) <b>extends</b> TimedEvent
+<b>case</b> <b>class</b> teSUCCESS(name: String, nr: Int, time: Int) <b>extends</b> TimedEvent
+<b>case</b> <b>class</b> teFAIL(name: String, nr: Int, time: Int) <b>extends</b> TimedEvent
+</pre>
+<br>
+
+We can now formulate the property as follows:
+
+<br><br>
+<pre>
+<b>class</b> R10_v3 <b>extends</b> Monitor[TimedEvent] {
+  require {
+    <b>case</b> teCOMMAND(name, number, time) =>
+      hot {
+        <b>case</b> e: Event <b>if</b> (time, e.time) beyond (10 seconds) => error
+        <b>case</b> teSUCCESS(`name`, `number`, _) => ok
+      }
+  }
+}
+</pre>
+<br>
+
+</html>
+

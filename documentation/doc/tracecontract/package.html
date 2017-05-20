@@ -1,0 +1,302 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html>
+        <head>
+          <title>tracecontract - TraceContract documentation - tracecontract</title>
+          <meta name="description" content="tracecontract - TraceContract documentation - tracecontract" />
+          <meta name="keywords" content="tracecontract TraceContract documentation tracecontract" />
+          <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+          
+      <link href="../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
+      <link href="../lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
+      <script type="text/javascript">
+         if(top === self) {
+            var url = '../index.html';
+            var hash = 'tracecontract.package';
+            var anchor = window.location.hash;
+            var anchor_opt = '';
+            if (anchor.length >= 1)
+              anchor_opt = '@' + anchor.substring(1);
+            window.location.href = url + '#' + hash + anchor_opt;
+         }
+   	  </script>
+    
+        </head>
+        <body class="value">
+      <div id="definition">
+        <img src="../lib/package_big.png" />
+        
+        <h1>tracecontract</h1>
+      </div>
+
+      <h4 id="signature" class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <span class="name">tracecontract</span>
+      </span>
+      </h4>
+      
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>The tracecontract package facilitates analysis of traces. It allows to write what we refer to
+as <i>trace contracts</i>.</p><p>A trace is a sequence of events, typically produced by a running software system.
+A trace contract is a class that extends the <a href="Monitor.html" class="extype" name="tracecontract.Monitor">tracecontract.Monitor</a> class, and
+specifies which traces are  well-formed and which are not. In other words, a trace
+contract can be seen as a predicate on traces. A trace contract consists of one or more
+properties, where a property is a named <i>formula</i>. The API provides several methods to
+construct formulas in various sub-logics, including LTL (Linear Temporal Logic), state
+machines, rule-based systems, and liberal combinations thereof.</p><p><br></p><p>Please read the:</p><p><br></p><p><a href="../../auxdoc/tracecontract-manual.html">TraceContract Manual</a></p><p><br></p><p>for more detailed information on how to use this package. It may be convenient to open the manual in a new window
+(<i>Right click - Open Link in New Window</i>) so that the API documentation can be browsed during reading.
+</p></div><div class="toggleContainer block">
+          <span class="toggle">Linear Supertypes</span>
+          <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
+        </div></div>
+        
+
+      <div id="mbrsel">
+        <div id="textfilter"><span class="pre"></span><span class="input"><input id="mbrsel-input" type="text" accesskey="/" /></span><span class="post"></span></div>
+        <div id="order">
+              <span class="filtertype">Ordering</span>
+              <ol>
+                
+                <li class="alpha in"><span>Alphabetic</span></li>
+                <li class="inherit out"><span>By inheritance</span></li>
+              </ol>
+            </div>
+        <div id="ancestors">
+                <span class="filtertype">Inherited<br />
+                </span>
+                <ol id="linearization">
+                  <li class="in" name="tracecontract"><span>tracecontract</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                </ol>
+              </div><div id="ancestors">
+            <span class="filtertype"></span>
+            <ol>
+              <li class="hideall out"><span>Hide All</span></li>
+              <li class="showall in"><span>Show all</span></li>
+            </ol>
+            <a href="http://docs.scala-lang.org/overviews/scaladoc/usage.html#members" target="_blank">Learn more about member selection</a>
+          </div>
+        <div id="visbl">
+            <span class="filtertype">Visibility</span>
+            <ol><li class="public in"><span>Public</span></li><li class="all out"><span>All</span></li></ol>
+          </div>
+      </div>
+
+      <div id="template">
+        <div id="allMembers">
+        
+
+        <div id="types" class="types members">
+              <h3>Type Members</h3>
+              <ol><li name="tracecontract.DataBase" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="DataBaseextendsAnyRef"></a>
+      <a id="DataBase:DataBase"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="DataBase.html"><span class="name">DataBase</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">This class offers features for defining facts, which can be added to or removed from a fact
+database (a set).</p>
+    </li><li name="tracecontract.Error" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="Error[Event]extendsAnyRef"></a>
+      <a id="Error[Event]:Error[Event]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="Error.html"><span class="name">Error</span></a><span class="tparams">[<span name="Event">Event</span>]</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">An error represents a scenario where a trace violates a TraceContract specification.</p>
+    </li><li name="tracecontract.ErrorTrace" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ErrorTrace[Event]extendsAnyRef"></a>
+      <a id="ErrorTrace[Event]:ErrorTrace[Event]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="ErrorTrace.html"><span class="name">ErrorTrace</span></a><span class="tparams">[<span name="Event">Event</span>]</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">An error (or success) trace represents the sequence of events that has lead to an error (success).</p>
+    </li><li name="tracecontract.Formulas" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="Formulas[Event]extendsAnyRef"></a>
+      <a id="Formulas[Event]:Formulas[Event]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="Formulas.html"><span class="name">Formulas</span></a><span class="tparams">[<span name="Event">Event</span>]</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">This trait provides the classes and methods with which to construct formulas.</p>
+    </li><li name="tracecontract.LivenessError" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="LivenessError[Event]extendsError[Event]withProductwithSerializable"></a>
+      <a id="LivenessError[Event]:LivenessError[Event]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="LivenessError.html"><span class="name">LivenessError</span></a><span class="tparams">[<span name="Event">Event</span>]</span><span class="params">(<span name="monitorName">monitorName: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="propertyName">propertyName: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="explanation">explanation: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="errorTrace">errorTrace: <a href="ErrorTrace.html" class="extype" name="tracecontract.ErrorTrace">ErrorTrace</a>[<span class="extype" name="tracecontract.LivenessError.Event">Event</span>]</span>)</span><span class="result"> extends <a href="Error.html" class="extype" name="tracecontract.Error">Error</a>[<span class="extype" name="tracecontract.LivenessError.Event">Event</span>] with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">A liveness error represents an error caused by a certain event not occurring in the trace.</p>
+    </li><li name="tracecontract.Message" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="MessageextendsProductwithSerializable"></a>
+      <a id="Message:Message"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="Message.html"><span class="name">Message</span></a><span class="params">(<span name="ok">ok: <span class="extype" name="scala.Boolean">Boolean</span></span>, <span name="message">message: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">Messages are produced by calls of the methods <code>ok(message: String)</code> and
+<code>error(message: String)</code>.</code></code></p>
+    </li><li name="tracecontract.Monitor" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Monitor[Event]extendsDataBasewithFormulas[Event]"></a>
+      <a id="Monitor[Event]:Monitor[Event]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="Monitor.html"><span class="name">Monitor</span></a><span class="tparams">[<span name="Event">Event</span>]</span><span class="result"> extends <a href="DataBase.html" class="extype" name="tracecontract.DataBase">DataBase</a> with <a href="Formulas.html" class="extype" name="tracecontract.Formulas">Formulas</a>[<span class="extype" name="tracecontract.Monitor.Event">Event</span>]</span>
+      </span>
+      </h4>
+      <p class="comment cmt">This class offers all the features of TraceContract.</p>
+    </li><li name="tracecontract.MonitorResult" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="MonitorResult[Event]extendsAnyRef"></a>
+      <a id="MonitorResult[Event]:MonitorResult[Event]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="MonitorResult.html"><span class="name">MonitorResult</span></a><span class="tparams">[<span name="Event">Event</span>]</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">The result of a trace analysis for a monitor.</p>
+    </li><li name="tracecontract.PropertyResult" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="PropertyResult[Event]extendsAnyRef"></a>
+      <a id="PropertyResult[Event]:PropertyResult[Event]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="PropertyResult.html"><span class="name">PropertyResult</span></a><span class="tparams">[<span name="Event">Event</span>]</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">A property result contains the errors of a particular property after a trace analysis.</p>
+    </li><li name="tracecontract.SafetyError" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="SafetyError[Event]extendsError[Event]withProductwithSerializable"></a>
+      <a id="SafetyError[Event]:SafetyError[Event]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="SafetyError.html"><span class="name">SafetyError</span></a><span class="tparams">[<span name="Event">Event</span>]</span><span class="params">(<span name="monitorName">monitorName: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="propertyName">propertyName: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="explanation">explanation: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="errorTrace">errorTrace: <a href="ErrorTrace.html" class="extype" name="tracecontract.ErrorTrace">ErrorTrace</a>[<span class="extype" name="tracecontract.SafetyError.Event">Event</span>]</span>)</span><span class="result"> extends <a href="Error.html" class="extype" name="tracecontract.Error">Error</a>[<span class="extype" name="tracecontract.SafetyError.Event">Event</span>] with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">A safety error represents an error caused by an event occurring that should not occur.</p>
+    </li><li name="tracecontract.Severity" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="SeverityextendsAnyRef"></a>
+      <a id="Severity:Severity"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="Severity.html"><span class="name">Severity</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">Type representing severity degrees assigned to a monitor.</p>
+    </li><li name="tracecontract.Success" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Success[Event]extendsError[Event]withProductwithSerializable"></a>
+      <a id="Success[Event]:Success[Event]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="Success.html"><span class="name">Success</span></a><span class="tparams">[<span name="Event">Event</span>]</span><span class="params">(<span name="monitorName">monitorName: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="propertyName">propertyName: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="explanation">explanation: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="errorTrace">errorTrace: <a href="ErrorTrace.html" class="extype" name="tracecontract.ErrorTrace">ErrorTrace</a>[<span class="extype" name="tracecontract.Success.Event">Event</span>]</span>)</span><span class="result"> extends <a href="Error.html" class="extype" name="tracecontract.Error">Error</a>[<span class="extype" name="tracecontract.Success.Event">Event</span>] with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">A success represents an event that causes a property to be (partially) satisfied.</p>
+    </li></ol>
+            </div>
+
+        
+
+        <div id="values" class="values members">
+              <h3>Value Members</h3>
+              <ol><li name="tracecontract.Severity" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Severity"></a>
+      <a id="Severity:Severity"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Severity$.html"><span class="name">Severity</span></a>
+      </span>
+      </h4>
+      <p class="comment cmt">The different possible pre-defined severities a monitor can be assigned.</p>
+    </li></ol>
+            </div>
+
+        
+
+        
+        </div>
+
+        <div id="inheritedMembers">
+        <div class="parent" name="scala.AnyRef">
+              <h3>Inherited from <span class="extype" name="scala.AnyRef">AnyRef</span></h3>
+            </div><div class="parent" name="scala.Any">
+              <h3>Inherited from <span class="extype" name="scala.Any">Any</span></h3>
+            </div>
+        
+        </div>
+
+        <div id="groupedMembers">
+        <div class="group" name="Ungrouped">
+              <h3>Ungrouped</h3>
+              
+            </div>
+        </div>
+
+      </div>
+
+      <div id="tooltip"></div>
+
+      <div id="footer">  </div>
+      <script defer="defer" type="text/javascript" id="jquery-js" src="../lib/jquery.js"></script><script defer="defer" type="text/javascript" id="jquery-ui-js" src="../lib/jquery-ui.js"></script><script defer="defer" type="text/javascript" id="tools-tooltip-js" src="../lib/tools.tooltip.js"></script><script defer="defer" type="text/javascript" id="template-js" src="../lib/template.js"></script>
+    </body>
+      </html>
