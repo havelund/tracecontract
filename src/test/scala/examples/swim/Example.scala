@@ -13,6 +13,10 @@ case class Enqueue(message: Any) extends MesaEvent
 
 case class Dequeue(message: Any) extends MesaEvent
 
+// ========================
+// === Data structures: ===
+// ========================
+
 case class Date(time: Int) {
   def isAfter(other: Date): Boolean = {
     time > other.time
