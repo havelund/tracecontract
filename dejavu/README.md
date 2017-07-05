@@ -1,7 +1,7 @@
 
 # Comparing DejaVu and MonPoly
 
-To run experiments, only the following to files are needed:
+To run experiments, only the following two files are needed:
 
 * dejavu-jars.zip : jar files and script to run dejavu.
 * properties.zip : specifications and log files.
