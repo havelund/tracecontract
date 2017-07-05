@@ -24,6 +24,9 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="SBT: org.scala-lang:scala-library:2.12.1:jar" level="project" />
+    <orderEntry type="library" name="SBT: org.scala-lang.modules:scala-java8-compat_2.12:0.8.0:jar" level="project" />
+    <orderEntry type="library" name="SBT: com.typesafe.akka:akka-actor_2.12:2.4.16:jar" level="project" />
+    <orderEntry type="library" name="SBT: com.typesafe:config:1.3.0:jar" level="project" />
     <orderEntry type="module-library">
       <library name="SBT: unmanaged-jars">
         <CLASSES>
@@ -33,8 +36,5 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="SBT: com.typesafe:config:1.3.0:jar" level="project" />
-    <orderEntry type="library" name="SBT: com.typesafe.akka:akka-actor_2.12:2.4.16:jar" level="project" />
-    <orderEntry type="library" name="SBT: org.scala-lang.modules:scala-java8-compat_2.12:0.8.0:jar" level="project" />
   </component>
 </module>
