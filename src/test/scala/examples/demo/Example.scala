@@ -3,16 +3,16 @@ package examples.demo
 import tracecontract._
 
 /**
- * Requirements:
- * - CommandsMustSucceed:
- * A command must eventually succeed without a failure before.
- *
- * - OnlyOneSuccess:
- * A command must not succeed more than once.
- *
- * - Alternation:
- * Commands and successes should alternate.
- */
+  * Requirements:
+  * - CommandsMustSucceed:
+  * A command must eventually succeed without a failure before.
+  *
+  * - OnlyOneSuccess:
+  * A command must not succeed more than once.
+  *
+  * - Alternation:
+  * Commands and successes should alternate.
+  */
 
 // ====================
 // === Event kinds: ===
@@ -70,31 +70,63 @@ class Alternation extends Monitor[Event](SUPERBAD) {
     }
 }
 
+class WrongSequence extends Monitor[Event] {
+  require {
+    case COMMAND(name, number) =>
+      state {
+        case SUCCESS(`name`, `number`) =>
+          step {
+            case SUCCESS(`name`, `number`) =>
+              strong {
+                case FAIL(`name`, `number`) => ok
+              }
+          }
+      }
+  }
+}
+
+class IncreasingNumbers extends Monitor[Event] {
+  var commands: Set[String] = Set()
+
+  require {
+    case COMMAND(name, number) =>
+      commands += name
+      state {
+        case COMMAND(_, number2) => number2 == number + 1
+      }
+  }
+
+  override def finish() {
+    println("commands issued: " + commands.mkString(","))
+  }
+}
+
 // ==============================================
 // === Combining properties into one monitor: ===
 // ==============================================
 
-class Requirements1 extends Monitor[Event] {
+class Properties1 extends Monitor[Event] {
   monitor(
     new CommandsMustSucceed,
     new OnlyOneSuccess)
 }
 
-class Requirements2 extends Monitor[Event] {
+class Properties2 extends Monitor[Event] {
   monitor(
-    new Alternation)
+    new Alternation,
+    new WrongSequence,
+    new IncreasingNumbers)
 }
 
-class Requirements extends Monitor[Event] {
-  monitor(new Requirements1, new Requirements2)
+class Properties extends Monitor[Event] {
+  monitor(new Properties1, new Properties2)
 }
 
 // ====================================
 // === Performing a trace analysis: ===
 // ====================================
 
-object TraceAnalysis1 {
-
+object TraceAnalysis {
   def main(args: Array[String]) {
     def trace: List[Event] =
       List(
@@ -110,8 +142,7 @@ object TraceAnalysis1 {
         SUCCESS("TAKE_THE_PICTURE", 20), // event #10
         SUCCESS("STOP_THE_DRIVING", 10), // event #11
         SUCCESS("TAKE_THE_PICTURE", 20)) // event #12
-
-    val monitor = new Requirements
+    val monitor = new Properties
     monitor.verify(trace)
   }
 }
