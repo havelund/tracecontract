@@ -23,9 +23,9 @@ class MesaMonitor(config: Config) extends Monitor[Event] {
 }
 
 
-// --------------------------
-// Your original formulation:
-// --------------------------
+// -------------------------
+// The original formulation:
+// -------------------------
 
 class WaypointsOrderMonitor_4(config: Config) extends MesaMonitor(config) {
   property {
