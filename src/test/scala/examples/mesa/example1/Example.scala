@@ -1,4 +1,4 @@
-package examples.swim
+package examples.mesa.example1
 
 import tracecontract._
 

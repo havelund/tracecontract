@@ -1,4 +1,4 @@
-package examples.mesa
+package examples.mesa.example2
 
 import tracecontract._
 
@@ -14,7 +14,7 @@ object Event {
   val W3 = 3
 }
 
-import Event._
+import examples.mesa.example2.Event._
 
 class WaypointMonitor extends Monitor[Event] {
   property('waypoints_ordering_statelogic) {
