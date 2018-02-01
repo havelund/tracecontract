@@ -8,7 +8,7 @@
                   _/ |                 
                  |__/                  
  
-        Version 1.2, December 28 - 2017
+        Version 1.2, January 31 - 2018
 
 ## Overview
 
@@ -91,17 +91,53 @@ With the following meaning:
 
     (*) seen(x) holds if x has been observed in the past
 
+We illustrate the logic with properties that an auction has to satisfy. The following
+observable events occur during an auction:
+
+* `list(i,r)` : item `i` is listed for auction with the minimal reserve sales price `r`.
+* `bid(i,a)`  : the bidding of `a` dollars on item `i`. 
+* `sell(i)`   : the selling of item `i` to highest bidder. 
+
+An auction system has to satisfy the four properties shown in below
+expressed over these three kinds of events:
+
+    prop incr : 
+      Forall i . Forall a1 . Forall a2 . @ P bid(i,a1) & bid(i,a2) -> a1 < a2
+
+    prop sell : 
+      Forall i . Forall r . P list(i,r) & sell(i) ->  exists a . P bid(i,a) & a >= r
+  
+    prop open : 
+      Forall i . Forall a . (bid(i,a) | sell(i)) -> exists r . @ [list(i,r),sell(i))
+    
+    prop once : 
+      Forall i . Forall r . list(i,r) -> ! exists s . @ P list(i,s)
+    
+Property `incr` states that bidding must be increasing.
+
+Property `sell` states that when an item is sold, there must exist a bidding
+on that item which is bigger than or equal to the reserve price.
+
+Property `open` states that bidding on and selling of an item are
+only allowed if the item has been listed and not yet sold.
+
+Finally, Property `once` states that an item can only be listed
+once.
 
 **The log file** (< logFile >) should be in comma separated value format (CSV): http://edoceo.com/utilitas/csv-file-format. For example, a file of
 the form:
 
-    login,John,10
-    login,Ann,42
+    list,chair,500
+    bid,chair,700
+    bid,chair,650
+    sell,chair
 
-with **no leading spaces** would mean two events:
+with **no leading spaces** would mean the four events:
 
-    login(John,10)
-    login(Ann,42)
+    list(chair,500)
+    bid(chair,700)
+    bid(chair,650)
+    sell(chair)
 
 **The bits per variable** (< bitsPerVariable >) indicates how many bits are assigned to each variable in the BDDs. This parameter is optional with the default value being 20. If the number is too low an error message will be issued during analysis as explained below. A too high number can have impact on the efficiency of the algorithm. Note that the number of values representable by N bits is 2^N, so one in general does not need very large numbers.  
 
@@ -120,21 +156,21 @@ is BDD graphs visualizable with GraphViz (http://www.graphviz.org).
 The tool will indicate a violation of a property by printing
 what event number it concerns and what event. For example:
 
-    *** Property secure violated on event number 701:
+    *** Property incr violated on event number 3:
 
     #########################################################
-    #### access(John,passwordfile)
+    #### bid(chair,650)
     #########################################################  
     
-indicates that event number 701 violates the property 'security', and that event is a line in the CSV file having the format:
+indicates that event number 3 violates the property `incr`, and that event is a line in the CSV file having the format:
 
-    access,John,passwordfile   
+    bid,chair,650   
 
 **Not enough bits per variable**
 If not enough bits have been allocated for a variable to hold the number of values generated for that variable, an assertion violation like the following is printed:
 
     *** java.lang.AssertionError: assertion failed: 
-        10 bits is not enough to represent variable u.
+        10 bits is not enough to represent variable i.
 
 One can/should experiment with BDD sizes.
 
