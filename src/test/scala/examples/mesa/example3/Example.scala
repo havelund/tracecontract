@@ -150,6 +150,27 @@ class WaypointsOrderMonitor_8(config: Config) extends MesaMonitor(config) {
     }
 }
 
+// ---------------------------------------------------
+// Allowing the same waypoint to occur multiple times:
+// ---------------------------------------------------
+
+class WaypointsOrderMonitor_9(config: Config) extends MesaMonitor(config) {
+  val W = config.getLongList("waypoints")
+
+  property {
+    waypointsOrderFormula(W)
+  }
+
+  def waypointsOrderFormula(wps: List[Long]): Formula =
+    state {
+      case Waypoint(p) if W.contains(p) =>
+        wps match {
+          case `p` :: _ => waypointsOrderFormula(wps)
+          case _ :: `p` :: rest =>  waypointsOrderFormula(wps.tail)
+          case _ => error
+        }
+    }
+}
 
 // -----------------
 // Testing monitors:
@@ -164,14 +185,17 @@ object TraceAnalysis {
         Other,
         Waypoint(1),
         Other,
-        Waypoint(3),
+        Waypoint(2),
         Other,
         Waypoint(2),
-        Other
+        Other,
+        Waypoint(3),
+        Other,
+        Waypoint(2)
       )
 
     println("START")
-    val monitor = new WaypointsOrderMonitor_8(config)
+    val monitor = new WaypointsOrderMonitor_9(config)
     monitor.setDebug(false)
     monitor.verify(trace)
   }
