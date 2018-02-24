@@ -1,5 +1,5 @@
-*/.DS_Store
-*/*.xml
+.DS_Store
+*.xml
 project/project/
 project/target/
 target/
