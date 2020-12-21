@@ -2,6 +2,7 @@ package tests.test3.slides
 
 import tracecontract._
 import tests._
+import scala.language.postfixOps
 
 // =======
 // Events:

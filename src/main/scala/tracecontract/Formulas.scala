@@ -10,7 +10,7 @@
 package tracecontract
 
 import java.awt.Toolkit
-import concurrent.Lock
+import java.util.concurrent.locks.ReentrantLock
 
 /**
  * This trait provides the classes and methods with which to construct formulas. Formulas
@@ -721,18 +721,18 @@ trait Formulas[Event] {
   }
 
   private case class Within(time: Int, var formula: Formula) extends Formula {
-    private var lock = new Lock
+    private var lock = new ReentrantLock
     private var timedOut = false
 
     val timer = Timer(time) {
-      lock.acquire
+      lock.lock
       formula = end(formula)
       timedOut = true
-      lock.release
+      lock.unlock
     }
 
     override def apply(event: Event): Formula = {
-      lock.acquire
+      lock.lock
       var result: Formula = this
       if (timedOut)
         result = formula
@@ -743,20 +743,20 @@ trait Formulas[Event] {
           result = formula
         }
       }
-      lock.release
+      lock.unlock
       result
     }
 
     override def reduce(): Formula = {
-      lock.acquire
+      lock.lock
       var result = if (timedOut) formula else this
-      lock.release
+      lock.unlock
     }
 
     override def toString: String = {
-      lock.acquire
+      lock.lock
       var result = "within (" + time + ") " + formula
-      lock.release
+      lock.unlock
       result
     }
   }

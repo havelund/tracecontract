@@ -4,6 +4,7 @@ package tests.test5
 import tracecontract._
 import tests._
 import org.junit.Test
+import scala.language.postfixOps
 
 // Past time logic experiments
 

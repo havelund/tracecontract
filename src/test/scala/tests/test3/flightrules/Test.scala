@@ -4,6 +4,7 @@ package tests.test3.flightrules
 import tracecontract._
 import tests._
 import org.junit.Test
+import scala.language.postfixOps
 
 // Scala Days 2011 paper: Checking Flight Rules with TraceContract: Application of a Scala DSL for Trace Analysis 
 // H. Barringer, K. Havelund and R. Morris 
